@@ -1,28 +1,31 @@
 $(function () {
     var $mainContainer = $('#main-container'),
         $navChat = $('#nav-chat');
-   // $mainContainer.html($mainContainer.load('../partials/chat.html'));
-    $navChat.on('click',function(e){
+    // $mainContainer.html($mainContainer.load('../partials/chat.html'));
+    $navChat.on('click', function (e) {
         console.log('in event');
-       // e.preventDefault();
-        $mainContainer.html($mainContainer.load('../partials/chat.html'));
+        // e.preventDefault();
+        console.log($mainContainer);
+        $mainContainer.load('partials/chat.html', null, injectHtml);
+
     });
 
-    console.log('hello');
-    var socket = io(),
-        $messageForm= $("#send-message"),
-        $messageField = $("#message"),
-        $chatB = $("#chat");
-console.log($messageForm);
-    $messageForm.submit(function(ev){
-        console.log('submit');
-        ev.preventDefault();
-        socket.emit('sent-message', $messageField.val());
-        $messageField.val('');
-    });
+    var injectHtml = function () {
 
-    socket.on('new-message', function(msg) {
-        $chatB.append(msg + "<br/>");
-    })
+        var socket = io(),
+            $messageField = $("#message"),
+            $chatB = $("#chat"),
+            $submitBtn = $("#submitBtn");
+
+        $submitBtn.on('click', function (ev) {
+            ev.preventDefault();
+            socket.emit('sent-message', $messageField.val());
+            $messageField.val('');
+        });
+
+        socket.on('new-message', function (msg) {
+            $chatB.append(msg + "<br/>");
+        });
+    }
 
 });
