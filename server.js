@@ -7,15 +7,12 @@ var express = require('express'),
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 
-//TODO: config express
-
-app.set('views', __dirname + '/server/views');
+// TODO: app.set !
 
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + '/public'));
-
-//TODO: set diff db for each enviroment
+//app.get partials
 
 var env = /* process.env.NODE_ENV ||*/ 'development';  // make sure we wont touch the database
 
@@ -63,8 +60,6 @@ passport.deserializeUser(function (id, done) {
 
 //TODO: add crypto for the authentication
 
-//TODO: config socket.io for the chat
-
 //TODO: config mongoose (db)
 if (env == 'development') {
     mongoose.connect('mongodb://localhost/paradiseProject'); // local database
@@ -102,6 +97,8 @@ server.listen(port, function () {
     console.log('Server listening at port %d', port);
 });
 
+
+//TODO: config socket.io for the chat
 
 io.sockets.on('connection', function (socket) {
     socket.on('sent-message', function (data) {  // data = message

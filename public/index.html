@@ -10,22 +10,27 @@
 <body>
 
 <header class="nav navbar-inverse navbar-fixed-top">
-    <div class="container">
+    <div class="container"><!--container-->
         <div class="navbar-header"><a href="#/" class="navbar-brand">Paradise</a>
         </div>
-        <div class="navbar-collapse collapse">
+        <div class="navbar-collapse collapse"><!-- navbar-collapse collapse-->
             <ul class="nav navbar-nav">
-                <li><a href="#/">Home</a>
+                <li><a href="#home">Home</a>
                 </li>
-                <li id="nav-chat"><a href="#/partials/chat">Chat</a>
+                <li ><a href="#chat" id="nav-chat">Chat</a>
                 </li>
             </ul>
-            <!--<div ng-include="'partials/account/login'"></div>-->
+            <div id="loginBar"></div>
         </div>
     </div>
 </header>
 <section>
     <div id="main-container"></div>
+   <!-- <div id="chat"></div>
+    <form id="send-message">
+        <input size="40px" id="message"/>
+        <input type="submit"/>
+    </form>-->
 </section>
 <footer>
     <p class="text-center">&copy; Telerik Academy 2014</p>
@@ -33,7 +38,9 @@
 
 
 <script src="lib/jquery-2.0.2.js"></script>
+<script src="lib/system.js/dist/system.js"></script>
 <script src="scripts/main.js"></script>
+<script src="scripts/config.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 </body>
 </html>
