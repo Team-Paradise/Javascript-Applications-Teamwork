@@ -29,6 +29,7 @@ $(function () {
                 success: function (data) {
                     // TODO: this should be plugged in the 'success' function in the POST ajax request
                     $('#loginForm').hide();
+                    // TODO: think of handlebars
                     $('#user-profile-dropdown').text(currentUser.username);
                     $('#logged-user').show();
                 },
