@@ -18,10 +18,20 @@ $(function () {
         $('#loginSubmit').on('click', function () {
             currentUser.username = $('#username').val();
             currentUser.password = $('#pass').val();
+
             // TODO: post data for the user on server, check in db for the user
-            // TODO: change loginBar and display username
+
+            // TODO: this should be plugged in the 'success' function in the POST ajax request 
+            $('#loginForm').hide();
+            $('#user-profile-dropdown').text(currentUser.username);
+            $('#logged-user').show();
+
             console.log(currentUser);
             return false;
+        });
+
+        $('#sign-up-button').on('click', function () {
+            $mainContainer.load('partials/sign-up-form.html');
         });
     });
 
