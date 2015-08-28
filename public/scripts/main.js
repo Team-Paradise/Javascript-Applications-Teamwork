@@ -19,12 +19,23 @@ $(function () {
             currentUser.username = $('#username').val();
             currentUser.password = $('#pass').val();
 
-            // TODO: post data for the user on server, check in db for the user
+            // DONE: post data for the user on server, check in db for the user
+            // TODO: extract in module, set promises
 
-            // TODO: this should be plugged in the 'success' function in the POST ajax request 
-            $('#loginForm').hide();
-            $('#user-profile-dropdown').text(currentUser.username);
-            $('#logged-user').show();
+            $.ajax({
+                url: '/User',
+                contentType: 'application/json',
+                data: currentUser,
+                success: function (data) {
+                    // TODO: this should be plugged in the 'success' function in the POST ajax request
+                    $('#loginForm').hide();
+                    $('#user-profile-dropdown').text(currentUser.username);
+                    $('#logged-user').show();
+                },
+                error: function (data) {
+                    alert("You don't have account! Sorry peach :D");
+                }
+            });
 
             console.log(currentUser);
             return false;

@@ -2,13 +2,20 @@ var express = require('express'),
     app = express(),
     passport = require('passport'),
     LocalPassport = require('passport-local'),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    bodyParser = require('body-parser');
 
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 
 // TODO: app.set !
+app.use(bodyParser.json());
 
+/*app.use(function (req, res) {
+ res.setHeader('Content-Type', 'text/plain')
+ res.write('you posted:\n')
+ res.end(JSON.stringify(req.body, null, 2))
+ });*/
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + '/public'));
@@ -62,7 +69,9 @@ passport.deserializeUser(function (id, done) {
 
 //TODO: config mongoose (db)
 if (env == 'development') {
-    mongoose.connect('mongodb://localhost/paradiseProject'); // local database
+    mongoose.connect('mongodb://localhost/paradiseProject')/*, function(){
+        mongoose.connection.db.dropDatabase();
+    }); // drop local database*/
 } else {
     mongoose.connect('mongodb://teamparadise:yellowsubmarine@ds035653.mongolab.com:35653/paradiseproject');
 }
@@ -84,12 +93,45 @@ var userSchema = mongoose.Schema({
 });
 
 var User = mongoose.model('User', userSchema);
-
+/*
 User.create({username: 'solara', firstName: 'Mariya', lastName: 'Steffanova'}).then(function (user) {
 
     console.log(user.username);
 
 });
+User.create({username: 'baretata', firstName: 'Zlatko', lastName: 'Zlatko'}).then(function (user) {
+
+    console.log(user.username);
+
+});
+User.create({username: 'kiko', firstName: 'Kiko', lastName: 'Kiko'}).then(function (user) {
+
+    console.log(user.username);
+
+});
+User.create({username: 'krasi', firstName: 'Krasi', lastName: 'Stoyanov'}).then(function (user) {
+
+    console.log(user.username);
+
+});*/
+
+app.get('/User', function (req, res) {
+    var user;
+    //middleware
+    //TODO: module + promises -> send response only when the query to db is ready!
+    User.find({
+        'username': req.query.username
+    }, function (err, users) {
+        if (err) {
+            console.log('Error searching in db: ' + err);
+        } else {
+            user = users[0].username;
+            res.json(user); // move out in promise
+        }
+    });
+
+});
+
 
 //TODO: find nodemon so you can stop restarting your server every 5 minutes like an idiot!
 
