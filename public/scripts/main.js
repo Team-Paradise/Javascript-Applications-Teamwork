@@ -46,9 +46,9 @@ $(function () {
             return false;
         });
 
-      /*  $('#sign-up-button').on('click', function () {
-            $mainContainer.load('partials/sign-up-form.html');
-        });*/
+        /*  $('#sign-up-button').on('click', function () {
+         $mainContainer.load('partials/sign-up-form.html');
+         });*/
     });
 //-------------------------- move to modules -----------------------------------------
     // Changing html partials
@@ -66,21 +66,22 @@ $(function () {
         $mainContainer.load(url, controller);
     };
 
-    getControllerOnHashChange = function(partialName){
-        if(partialName === 'chat'){
-            return chatController();
-        } else if(partialName === 'sign-up-form'){
-            return signupController();
+    getControllerOnHashChange = function (partialName) {
+        if (partialName === 'chat') {
+            return chatController;
+        } else if (partialName === 'sign-up-form') {
+            return signupController;
         }
     };
 
 
     // CONTROLLERS
-    var signupController = function(){
+    var signupController = function () {
         console.log('Hello from SIGN UP controller');
     };
 
-    // Controller for Chat, must be moved to another js module
+
+// Controller for Chat, must be moved to another js module
     var chatController = function () {
         var socket = io(),
             $messageField = $("#message"),
@@ -97,7 +98,7 @@ $(function () {
 
         $("#message").keypress(function (e) {
             var key = e.which;
-            if(key == 13) {
+            if (key == 13) {
                 $("#submitBtn").click();
                 return false;
             }
@@ -106,5 +107,5 @@ $(function () {
         socket.on('new-message', function (msg) {
             $chat.append(msg + "<br/>");
         });
-    }
+    };
 });
