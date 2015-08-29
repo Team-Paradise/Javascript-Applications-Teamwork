@@ -69,17 +69,27 @@ $(function () {
     var injectHtml = function () {
         var socket = io(),
             $messageField = $("#message"),
-            $chatB = $("#chat"),
+            $chat = $("#chat"),
             $submitBtn = $("#submitBtn");
 
         $submitBtn.on('click', function (ev) {
             ev.preventDefault();
-            socket.emit('sent-message', $messageField.val());
-            $messageField.val('');
+            if ($messageField.val()) {
+                socket.emit('sent-message', $messageField.val());
+                $messageField.val('');
+            }
+        });
+
+        $("#message").keypress(function (e) {
+            var key = e.which;
+            if(key == 13) {
+                $("#submitBtn").click();
+                return false;
+            }
         });
 
         socket.on('new-message', function (msg) {
-            $chatB.append(msg + "<br/>");
+            $chat.append(msg + "<br/>");
         });
     }
 });
