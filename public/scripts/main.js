@@ -27,14 +27,18 @@ $(function () {
                 contentType: 'application/json',
                 data: currentUser,
                 success: function (data) {
+                    console.log(data);
                     // TODO: this should be plugged in the 'success' function in the POST ajax request
                     $('#loginForm').hide();
                     // TODO: think of handlebars
-                    $('#user-profile-dropdown').text(currentUser.username);
+                    $('#user-profile-dropdown').text(data.username);
                     $('#logged-user').show();
                 },
                 error: function (data) {
-                    alert("You don't have account! Sorry peach :D");
+                    $('<h3 />')
+                        .text('Username or password are not valid!')
+                        .css('color', 'red')
+                        .appendTo($mainContainer);
                 }
             });
 

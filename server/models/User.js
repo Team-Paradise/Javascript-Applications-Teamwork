@@ -4,8 +4,8 @@ var mongoose = require('mongoose');
 var userSchema = mongoose.Schema({
         username: {type: String},
         firstName: {type: String},
-        lastName: {type: String}/*,
-        password: {type: String},
+        lastName: {type: String},
+        password: {type: String}/*,
         email: {type: String}*/
         //TODO groups
     });
@@ -34,22 +34,22 @@ module.exports.createInitialUsers = function () {
         console.log("Creating users..");
 
         if (users.length === 0 || users.length < 5) {
-            User.create({username: 'solara54', firstName: 'Mariya', lastName: 'Steffanova'}).then(function (user) {
+            User.create({username: 'solara54', firstName: 'Mariya', lastName: 'Steffanova', password: '12345'}).then(function (user) {
 
                 console.log(user.username);
 
             });
-            User.create({username: 'baretata', firstName: 'Zlatko', lastName: 'Zlatko'}).then(function (user) {
+            User.create({username: 'baretata', firstName: 'Zlatko', lastName: 'Zlatko', password: '12345'}).then(function (user) {
 
                 console.log(user.username);
 
             });
-            User.create({username: 'kiko', firstName: 'Kiko', lastName: 'Kiko'}).then(function (user) {
+            User.create({username: 'kiko', firstName: 'Kiko', lastName: 'Kiko', password: '12345'}).then(function (user) {
 
                 console.log(user.username);
 
             });
-            User.create({username: 'krasi', firstName: 'Krasi', lastName: 'Stoyanov'}).then(function (user) {
+            User.create({username: 'krasi', firstName: 'Krasi', lastName: 'Stoyanov', password: '12345'}).then(function (user) {
 
                 console.log(user.username);
 
