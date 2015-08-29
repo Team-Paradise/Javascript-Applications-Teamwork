@@ -4,6 +4,6 @@
 System.config({
     transpiler: 'babel',
     map: {
-        "babel": '../node_modules/babel-core/browser.js'
+        "babel": 'lib/babel-core/browser.js'
     }
 });

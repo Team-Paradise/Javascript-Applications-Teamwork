@@ -6,7 +6,6 @@
     "start": "node app"
   },
   "dependencies": {
-    "babel-core": "^5.8.22",
     "body-parser": "^1.13.3",
     "express": "^4.0.0",
     "mongoose": "^3.8.8",
