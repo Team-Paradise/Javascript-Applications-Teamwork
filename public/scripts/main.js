@@ -78,6 +78,43 @@ $(function () {
     // CONTROLLERS
     var signupController = function () {
         console.log('Hello from SIGN UP controller');
+        var $signUpSubmit = $('#signUpSubmit');
+
+        $signUpSubmit.on('click', function () {
+            var $username = $('#inputUsername').val(),
+                $email = $('#inputEmail').val(),
+                $password = $('#inputPassword').val();
+
+              var  newUser = {
+                    username: $username,
+                    email: $email,
+                    password: $password
+                };
+
+            $.ajax({
+                method: 'POST',
+                url: '/User',
+                contentType: 'application/json',
+                data: JSON.stringify(newUser),
+                success: function(data){
+                    console.log('POST success! ');
+                    console.log(data);
+                    console.log('-----');
+                },
+                error:function(data){
+                    console.log('Error on POST');
+                    console.log(data);
+                    console.log('--end err--');
+                }
+            });
+
+
+            console.log($username);
+            console.log($email);
+            console.log($password);
+            return false;
+        })
+
     };
 
 

@@ -25,4 +25,15 @@ module.exports = function (app) {
         });
 
     });
+
+    app.post('/User',function(req, res, next){
+        console.log('On server POSTing');
+        console.log(req.body);
+        console.log('..end server..');
+
+        // TODO: simple validation of fortmat of email. pass...
+        // TODO: check if the user is already registred
+        // TODO: if not -> send data to database and return success
+        res.json(req.body);
+    })
 };
