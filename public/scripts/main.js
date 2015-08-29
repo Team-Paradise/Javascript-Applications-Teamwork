@@ -1,11 +1,5 @@
 //TODO: #! - for google
 $(function () {
-   /* var loginManager = System.import('scripts/loginController.js')
-        .then(function (loginModule) {
-            console.log('imported!!!');
-            loginModule.getLoginData();
-        });*/
-
     var $mainContainer = $('#main-container'),
         $loginBar = $('#loginBar');
 
@@ -14,23 +8,24 @@ $(function () {
         password: ''
     };
 
-/*toastr.options = {
-    "closeButton": false,
-    "debug": false,
-    "newestOnTop": false,
-    "progressBar": false,
-    "positionClass": "toast-top-center",
-    "preventDuplicates": false,
-    "onclick": null,
-    "showDuration": "300",
-    "hideDuration": "1000",
-    "timeOut": "5000",
-    "extendedTimeOut": "1000",
-    "showEasing": "swing",
-    "hideEasing": "linear",
-    "showMethod": "fadeIn",
-    "hideMethod": "fadeOut"
-};*/
+    /* Some usefull options for toastr:
+     toastr.options = {
+     "closeButton": false,
+     "debug": false,
+     "newestOnTop": false,
+     "progressBar": false,
+     "positionClass": "toast-top-center",
+     "preventDuplicates": false,
+     "onclick": null,
+     "showDuration": "300",
+     "hideDuration": "1000",
+     "timeOut": "5000",
+     "extendedTimeOut": "1000",
+     "showEasing": "swing",
+     "hideEasing": "linear",
+     "showMethod": "fadeIn",
+     "hideMethod": "fadeOut"
+     };*/
     //TODO: make div for this html which should change content on login
     $loginBar.load('partials/loginBar.html', function () {
         $('#loginSubmit').on('click', function () {
@@ -53,10 +48,8 @@ $(function () {
                     $('#logged-user').show();
                 },
                 error: function (data) {
-                   /* $('<h3 />')
-                        .text('Username or password are not valid!')
-                        .css('color', 'red')
-                        .appendTo($mainContainer);*/
+
+                    toastr.options = {"positionClass": "toast-top-right"};
                     toastr.error('Username or password are not valid!');
                 }
             });
@@ -103,33 +96,41 @@ $(function () {
                 $email = $('#inputEmail').val(),
                 $password = $('#inputPassword').val();
 
-              var  newUser = {
-                    username: $username,
-                    email: $email,
-                    password: $password
-                };
+            var newUser = {
+                username: $username,
+                email: $email,
+                password: $password
+            };
 
             $.ajax({
                 method: 'POST',
                 url: '/signup',
                 contentType: 'application/json',
                 data: JSON.stringify(newUser),
-                success: function(data){
+                success: function (data) {
                     console.log('POST success! ');
                     console.log(data);
                     console.log('-----');
                 },
-                error:function(data){
-                    console.log('Error on POST');
-                    console.log(data);
-                    console.log('--end err--');
+                error: function (data) {
+                    switch (data.status) {
+                        case 422:
+                            toastr.options = {"positionClass": "toast-top-center"};
+                            toastr.error('User with this username already exist! Please choose another one.');
+                            break;
+                        case 404:
+                            toastr.error('Sadly.. something happand with the database..');
+                            break;
+                        case '422':
+                            console.log('string');
+                            break;
+                        default:
+                            break;
+                    }
+
                 }
             });
 
-
-            console.log($username);
-            console.log($email);
-            console.log($password);
             return false;
         })
 

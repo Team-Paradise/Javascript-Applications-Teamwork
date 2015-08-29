@@ -31,14 +31,14 @@ module.exports = function (app) {
         console.log(req.body);
         console.log('..end server..');
         User.findOne({
-            'username': req.body.username,
-            'password': req.body.password
+            'username': req.body.username
         }, function (err, user) {
             if (err) {
                 console.log('Error searching in db: ' + err);
                 res.sendStatus(404);
             } else if (user) {
-                // user already exist
+                res.sendStatus(422);
+
             }
             else {
                 var newUser = req.body;
@@ -54,8 +54,8 @@ module.exports = function (app) {
             }
         });
         // TODO: simple validation of fortmat of email. pass...
-        // TODO: check if the user is already registred
-        // TODO: if not -> send data to database and return success
-        // res.json(req.body);
+        // DONE: check if the user is already registred
+        // DONE: if not -> send data to database and return success
+
     })
 };
