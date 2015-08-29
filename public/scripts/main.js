@@ -1,10 +1,13 @@
 //TODO: #! - for google
+import '../lib/jquery/dist/jquery.js';
+import 'scripts/loginController.js';
+
 $(function () {
-    var loginManager = System.import('scripts/loginController.js')
-        .then(function (loginModule) {
-            console.log('imported!!!');
-            loginModule.getLoginData();
-        });
+    //var loginManager = System.import('scripts/loginController.js')
+    //    .then(function (loginModule) {
+    //        console.log('imported!!!');
+    //        loginModule.getLoginData();
+    //    });
 
     var $mainContainer = $('#main-container'),
         $loginBar = $('#loginBar');
@@ -58,7 +61,7 @@ $(function () {
         showPage(path);
     });
 
-    showPage = function (partial) {
+    var showPage = function (partial) {
         console.log('hello from show page');
         var url = 'partials/' + partial + '.html';
         console.log(url);
@@ -66,7 +69,7 @@ $(function () {
         $mainContainer.load(url, controller);
     };
 
-    getControllerOnHashChange = function (partialName) {
+    var getControllerOnHashChange = function (partialName) {
         if (partialName === 'chat') {
             return chatController;
         } else if (partialName === 'sign-up-form') {
