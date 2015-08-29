@@ -1,9 +1,9 @@
 {
   "name": "SimpleSetUpTest",
   "version": "0.0.1",
-  "main": "scripts/main.js",
+  "main": "server.js",
   "scripts": {
-    "start": "server.js"
+    "start": "node app"
   },
   "dependencies": {
     "body-parser": "^1.13.3",

@@ -1,13 +1,10 @@
 //TODO: #! - for google
-import '../lib/jquery/dist/jquery.js';
-import 'scripts/loginController.js';
-
 $(function () {
-    //var loginManager = System.import('scripts/loginController.js')
-    //    .then(function (loginModule) {
-    //        console.log('imported!!!');
-    //        loginModule.getLoginData();
-    //    });
+   /* var loginManager = System.import('scripts/loginController.js')
+        .then(function (loginModule) {
+            console.log('imported!!!');
+            loginModule.getLoginData();
+        });*/
 
     var $mainContainer = $('#main-container'),
         $loginBar = $('#loginBar');
@@ -79,7 +76,7 @@ $(function () {
         showPage(path);
     });
 
-    var showPage = function (partial) {
+    showPage = function (partial) {
         console.log('hello from show page');
         var url = 'partials/' + partial + '.html';
         console.log(url);
@@ -87,7 +84,7 @@ $(function () {
         $mainContainer.load(url, controller);
     };
 
-    var getControllerOnHashChange = function (partialName) {
+    getControllerOnHashChange = function (partialName) {
         if (partialName === 'chat') {
             return chatController;
         } else if (partialName === 'sign-up-form') {
@@ -114,7 +111,7 @@ $(function () {
 
             $.ajax({
                 method: 'POST',
-                url: '/User',
+                url: '/signup',
                 contentType: 'application/json',
                 data: JSON.stringify(newUser),
                 success: function(data){
