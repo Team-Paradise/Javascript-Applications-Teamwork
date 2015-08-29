@@ -16,6 +16,24 @@ $(function () {
         username: '',
         password: ''
     };
+
+/*toastr.options = {
+    "closeButton": false,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": false,
+    "positionClass": "toast-top-center",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+};*/
     //TODO: make div for this html which should change content on login
     $loginBar.load('partials/loginBar.html', function () {
         $('#loginSubmit').on('click', function () {
@@ -38,14 +56,14 @@ $(function () {
                     $('#logged-user').show();
                 },
                 error: function (data) {
-                    $('<h3 />')
+                   /* $('<h3 />')
                         .text('Username or password are not valid!')
                         .css('color', 'red')
-                        .appendTo($mainContainer);
+                        .appendTo($mainContainer);*/
+                    toastr.error('Username or password are not valid!');
                 }
             });
 
-            console.log(currentUser);
             return false;
         });
 
