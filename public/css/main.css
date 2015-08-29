@@ -5,3 +5,10 @@ body{
  input {
     margin-right: 10px;
 }
+button a {
+    color: white;
+}
+button a:hover{
+    color: white;
+    text-decoration: none;
+}

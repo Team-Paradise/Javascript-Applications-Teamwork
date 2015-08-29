@@ -46,11 +46,11 @@ $(function () {
             return false;
         });
 
-        $('#sign-up-button').on('click', function () {
+      /*  $('#sign-up-button').on('click', function () {
             $mainContainer.load('partials/sign-up-form.html');
-        });
+        });*/
     });
-
+//-------------------------- move to modules -----------------------------------------
     // Changing html partials
     $(window).on('hashchange', function (e) {
         console.log('hash change in window');
@@ -62,11 +62,26 @@ $(function () {
         console.log('hello from show page');
         var url = 'partials/' + partial + '.html';
         console.log(url);
-        $mainContainer.load(url, injectHtml);
+        var controller = getControllerOnHashChange(partial);
+        $mainContainer.load(url, controller);
+    };
+
+    getControllerOnHashChange = function(partialName){
+        if(partialName === 'chat'){
+            return chatController();
+        } else if(partialName === 'sign-up-form'){
+            return signupController();
+        }
+    };
+
+
+    // CONTROLLERS
+    var signupController = function(){
+        console.log('Hello from SIGN UP controller');
     };
 
     // Controller for Chat, must be moved to another js module
-    var injectHtml = function () {
+    var chatController = function () {
         var socket = io(),
             $messageField = $("#message"),
             $chatB = $("#chat"),
