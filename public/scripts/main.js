@@ -1,10 +1,10 @@
 //TODO: #! - for google
 $(function () {
-    var loginManager = System.import('scripts/loginController.js')
+   /* var loginManager = System.import('scripts/loginController.js')
         .then(function (loginModule) {
             console.log('imported!!!');
             loginModule.getLoginData();
-        });
+        });*/
 
     var $mainContainer = $('#main-container'),
         $loginBar = $('#loginBar');
@@ -111,7 +111,7 @@ $(function () {
 
             $.ajax({
                 method: 'POST',
-                url: '/User',
+                url: '/signup',
                 contentType: 'application/json',
                 data: JSON.stringify(newUser),
                 success: function(data){

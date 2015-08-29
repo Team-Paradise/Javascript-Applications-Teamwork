@@ -26,14 +26,36 @@ module.exports = function (app) {
 
     });
 
-    app.post('/User',function(req, res, next){
+    app.post('/signup', function (req, res, next) {
         console.log('On server POSTing');
         console.log(req.body);
         console.log('..end server..');
+        User.findOne({
+            'username': req.body.username,
+            'password': req.body.password
+        }, function (err, user) {
+            if (err) {
+                console.log('Error searching in db: ' + err);
+                res.sendStatus(404);
+            } else if (user) {
+                // user already exist
+            }
+            else {
+                var newUser = req.body;
+                User.create({
+                    username: newUser.username,
+                    firstName: 'Test',
+                    lastName: 'Testov',
+                    password: newUser.password,
+                    email: newUser.email
+                });
 
+                res.json({username: newUser.username, password: newUser.password});
+            }
+        });
         // TODO: simple validation of fortmat of email. pass...
         // TODO: check if the user is already registred
         // TODO: if not -> send data to database and return success
-        res.json(req.body);
+        // res.json(req.body);
     })
 };
