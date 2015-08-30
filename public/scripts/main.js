@@ -1,12 +1,13 @@
 //TODO: #! - for google
-$(function () {
+//import '../../node_modules/socket.io/socket.io.js';
+//import '../lib/jquery/dist/jquery.js';
+import '../lib/jquery-2.0.2.js';
+import lc from './loginController.js';
+//import toastr from '../lib/toastr/toastr.js';
+
+var start = $(function () {
     var $mainContainer = $('#main-container'),
         $loginBar = $('#loginBar');
-
-    var currentUser = {
-        username: '',
-        password: ''
-    };
 
     /* Some usefull options for toastr:
      toastr.options = {
@@ -26,9 +27,11 @@ $(function () {
      "showMethod": "fadeIn",
      "hideMethod": "fadeOut"
      };*/
+	 
     //TODO: make div for this html which should change content on login
     $loginBar.load('partials/loginBar.html', function () {
-        $('#loginSubmit').on('click', function () {
+		lc.getLoginData();
+        /*$('#loginSubmit').on('click', function () {
             currentUser.username = $('#username').val();
             currentUser.password = $('#pass').val();
 
@@ -48,14 +51,14 @@ $(function () {
                     $('#logged-user').show();
                 },
                 error: function (data) {
-
-                    toastr.options = {"positionClass": "toast-top-right"};
-                    toastr.error('Username or password are not valid!');
+					console.log('wrong user');
+                    //toastr.options = {"positionClass": "toast-top-right"};
+                    //toastr.error('Username or password are not valid!');
                 }
             });
 
             return false;
-        });
+        });*/
 
         /*  $('#sign-up-button').on('click', function () {
          $mainContainer.load('partials/sign-up-form.html');
@@ -69,7 +72,7 @@ $(function () {
         showPage(path);
     });
 
-    showPage = function (partial) {
+    var showPage = function (partial) {
         console.log('hello from show page');
         var url = 'partials/' + partial + '.html';
         console.log(url);
@@ -77,7 +80,7 @@ $(function () {
         $mainContainer.load(url, controller);
     };
 
-    getControllerOnHashChange = function (partialName) {
+    var getControllerOnHashChange = function (partialName) {
         if (partialName === 'chat') {
             return chatController;
         } else if (partialName === 'sign-up-form') {
@@ -165,3 +168,5 @@ $(function () {
         });
     };
 });
+
+export {start};

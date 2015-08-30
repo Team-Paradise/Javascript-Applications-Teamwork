@@ -37,11 +37,16 @@
 </footer>
 
 
-<script src="lib/jquery-2.0.2.js"></script>
-<script src="lib/system.js/dist/system.js"></script>
-<script src="scripts/main.js"></script>
-<script src="scripts/config.js"></script>
+<!--<script src="lib/jquery-2.0.2.js"></script>-->
+<!--<script src="scripts/main.js"></script>-->
 <script src="/socket.io/socket.io.js"></script>
-<script src= "lib/toastr/toastr.js"></script>
+<!--<script src= "lib/toastr/toastr.js"></script>-->
+<script src="lib/system.js/dist/system.js"></script>
+<script src="scripts/config.js"></script>
+<script>
+	System.import('scripts/main.js').then(function(main) {
+		main.start;
+	});
+</script>
 </body>
 </html>
