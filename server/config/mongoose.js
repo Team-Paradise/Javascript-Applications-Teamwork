@@ -1,7 +1,9 @@
 var mongoose = require('mongoose'),
-    User = require('../models/User');
+    User = require('../models/User'),
+    Group = require('../models/Group');
 
-module.exports = function(config) {
+
+module.exports = function (config) {
     mongoose.connect(config.db);
 
     var db = mongoose.connection;
@@ -12,15 +14,19 @@ module.exports = function(config) {
             return;
         } else {
             console.log("Database feeling fine and running");
+
             mongoose.connection.db.dropDatabase();
             console.log('----------');
             console.log("Database droped..");
         }
     });
 
-    db.on('error', function(err){
+    db.on('error', function (err) {
         console.log('Database error: ' + err);
     });
 
     User.createInitialUsers();
+    // Group.createInitialGroups();
+
+
 };
