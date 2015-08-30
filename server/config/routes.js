@@ -24,7 +24,20 @@ module.exports = function (app) {
         console.log('On server POSTing');
         console.log(req.body);
         console.log('..end server..');
-        User.findOne({
+
+        userController.signup(req.body, function(err, data){
+            if(err){
+                console.log('Big fat error');
+                console.log(err);
+                req.sendStatus(400);
+            } if(data){
+                res.json({username: data.username, password: data.password});
+            } else{
+                res.sendStatus(422);
+            }
+        });
+
+       /* User.findOne({
             'username': req.body.username
         }, function (err, user) {
             if (err) {
@@ -46,7 +59,7 @@ module.exports = function (app) {
 
                 res.json({username: newUser.username, password: newUser.password});
             }
-        });
+        });*/
         // TODO: simple validation of fortmat of email. pass...
         // DONE: check if the user is already registred
         // DONE: if not -> send data to database and return success

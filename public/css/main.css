@@ -12,3 +12,9 @@ button a:hover{
     color: white;
     text-decoration: none;
 }
+
+/*TODO: Krasiii help :D */
+#group-nav{
+    width: 800px;
+    margin-left: 50px;
+}

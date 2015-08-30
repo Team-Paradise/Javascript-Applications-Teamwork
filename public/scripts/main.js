@@ -1,6 +1,7 @@
 //TODO: #! - for google
 $(function () {
     var $mainContainer = $('#main-container'),
+        $groupContainer = $('#group-container'),
         $loginBar = $('#loginBar');
 
     var currentUser = {
@@ -73,20 +74,64 @@ $(function () {
         console.log('hello from show page');
         var url = 'partials/' + partial + '.html';
         console.log(url);
-        var controller = getControllerOnHashChange(partial);
-        $mainContainer.load(url, controller);
+        console.log(partial);
+        var action = getActionOnHashChange(partial);
+        console.log(action);
+        if (action) {
+            action.container.load(url, action.controller);
+        }
     };
 
-    getControllerOnHashChange = function (partialName) {
-        if (partialName === 'chat') {
-            return chatController;
-        } else if (partialName === 'sign-up-form') {
-            return signupController;
+    getActionOnHashChange = function (partialName) {
+
+        switch (partialName) {
+            case 'home':
+                return {container: $mainContainer, controller: homeController};
+            case 'sign-up-form':
+                return {container: $mainContainer, controller: signupController};
+            case 'group-nav':
+                return {container: $mainContainer, controller: groupNavController};
+            case 'feed':
+                return {container: $groupContainer, controller: feedController};
+            case 'meetings':
+                return {container: $groupContainer, controller:meetingsController};
+            case 'todo-list':
+                return {container: $groupContainer, controller:todoController};
+            case 'chat':
+                return {container: $groupContainer, controller:chatController};
+            case 'calendar':
+                return {container: $groupContainer, controller:calendarController};
+
+
+            default:
+                return false;
+                break;
         }
+
     };
 
 
     // CONTROLLERS
+    var homeController = function () {
+        console.log('home page loaded');
+    };
+    var feedController = function () {
+        console.log('feed page loaded');
+    };
+    var meetingsController = function () {
+        console.log('meetings page loaded');
+    };
+    var todoController = function () {
+        console.log('todo page loaded');
+    };
+    var calendarController = function () {
+        console.log('calendar page loaded');
+    };
+
+    var groupNavController = function () {
+        console.log('group navigation loaded');
+    };
+
     var signupController = function () {
         console.log('Hello from SIGN UP controller');
         var $signUpSubmit = $('#signUpSubmit');

@@ -19,10 +19,30 @@ module.exports = {
             }
         });
     },
-    logout: function(){
+    logout: function () {
 
     },
-    signup: function(){
+    signup: function (userRequest, next) {
+        User.findOne({username: userRequest.username}, function (err, user) {
+            if (err) {
 
+                next(err);
+                return;
+            } else if (user) {
+                console.log(user);
+                next({error: 422});
+                return;
+            } else {
+                User.create({
+                    username: userRequest.username,
+                    firstName: 'Test',
+                    lastName: 'Testov',
+                    password: userRequest.password,
+                    email: userRequest.email
+                });
+                next(null, userRequest);
+                return;
+            }
+        })
     }
 };
