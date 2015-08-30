@@ -1,48 +1,55 @@
 var User = require('mongoose').model('User');
 
 module.exports = {
-    login: function (userRequest, next) {
+    login:function (req, res, next) {
+        console.log('been here');
+        //middleware
+        //TODO: module + promises -> send response only when the query to db is ready!
+        // TODO: dont send the pass to the client, hash the pass before sending to db (crypto)
         User.findOne({
-            'username': userRequest.username,
-            'password': userRequest.password
+            'username': req.query.username,
+            'password': req.query.password
         }, function (err, user) {
             if (err) {
                 console.log('Error searching in db: ' + err);
-                return next({error: 404});
+                res.sendStatus(404);
             } else if (user) {
-                console.log('yep, found user');
-                if (userRequest.password === user.password) {
-                    return next(null, user);
+                if (req.query.password === user.password) {
+                    res.json(user); // move out in promise
                 }
-            } else {
-                return next({error: 404});
+            }
+            else {
+                res.sendStatus(404);
             }
         });
+
     },
     logout: function () {
 
     },
-    signup: function (userRequest, next) {
-        User.findOne({username: userRequest.username}, function (err, user) {
+    signup: function (req, res, next) {
+        User.findOne({
+            'username': req.body.username
+        }, function (err, user) {
             if (err) {
-
-                next(err);
-                return;
+                console.log('Error searching in db: ' + err);
+                res.sendStatus(404);
             } else if (user) {
-                console.log(user);
-                next({error: 422});
-                return;
-            } else {
+                res.sendStatus(422);
+
+            }
+            else {
+                var newUser = req.body;
                 User.create({
-                    username: userRequest.username,
+                    username: newUser.username,
                     firstName: 'Test',
                     lastName: 'Testov',
-                    password: userRequest.password,
-                    email: userRequest.email
+                    password: newUser.password,
+                    email: newUser.email
                 });
-                next(null, userRequest);
-                return;
+
+                res.json({username: newUser.username, password: newUser.password});
             }
-        })
+        });
     }
 };
