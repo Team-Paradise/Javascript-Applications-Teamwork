@@ -1,55 +1,48 @@
 var User = require('mongoose').model('User');
 
 module.exports = {
-    login:function (req, res, next) {
-        console.log('been here');
-        //middleware
-        //TODO: module + promises -> send response only when the query to db is ready!
-        // TODO: dont send the pass to the client, hash the pass before sending to db (crypto)
+    login: function (userRequest, next) {
         User.findOne({
-            'username': req.query.username,
-            'password': req.query.password
+            'username': userRequest.username,
+            'password': userRequest.password
         }, function (err, user) {
             if (err) {
                 console.log('Error searching in db: ' + err);
-                res.sendStatus(404);
+                return next({error: 404});
             } else if (user) {
-                if (req.query.password === user.password) {
-                    res.json(user); // move out in promise
+                console.log('yep, found user');
+                if (userRequest.password === user.password) {
+                    return next(null, user);
                 }
-            }
-            else {
-                res.sendStatus(404);
+            } else {
+                return next({error: 404});
             }
         });
-
     },
     logout: function () {
 
     },
-    signup: function (req, res, next) {
-        User.findOne({
-            'username': req.body.username
-        }, function (err, user) {
+    signup: function (userRequest, next) {
+        User.findOne({username: userRequest.username}, function (err, user) {
             if (err) {
-                console.log('Error searching in db: ' + err);
-                res.sendStatus(404);
-            } else if (user) {
-                res.sendStatus(422);
 
-            }
-            else {
-                var newUser = req.body;
+                next(err);
+                return;
+            } else if (user) {
+                console.log(user);
+                next({error: 422});
+                return;
+            } else {
                 User.create({
-                    username: newUser.username,
+                    username: userRequest.username,
                     firstName: 'Test',
                     lastName: 'Testov',
-                    password: newUser.password,
-                    email: newUser.email
+                    password: userRequest.password,
+                    email: userRequest.email
                 });
-
-                res.json({username: newUser.username, password: newUser.password});
+                next(null, userRequest);
+                return;
             }
-        });
+        })
     }
 };

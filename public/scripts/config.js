@@ -1,9 +1,13 @@
-/**
- * Created by Solara on 26/08/2015.
- */
+
 System.config({
     transpiler: 'babel',
+	babelOptions: {
+		optional: [
+			"runtime"
+		]
+	},
     map: {
-        "babel": 'lib/babel-core/browser.js'
+        babel: 'lib/babel-core/browser.js',
+		jquery: 'lib/jquery/dist/jquery.js'
     }
 });

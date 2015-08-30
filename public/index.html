@@ -29,7 +29,6 @@
 
     </div>
     <div id="group-container"></div>
-
    <!-- <div id="chat"></div>
     <form id="send-message">
         <input size="40px" id="message"/>
@@ -41,8 +40,8 @@
 </footer>
 
 
-<!--<script src="lib/jquery-2.0.2.js"></script>-->
-<!--<script src="scripts/main.js"></script>-->
+<!--<script src="lib/jquery-2.0.2.js"></script>
+<script src="scripts/main.js"></script>
 <!--<script src="/socket.io/socket.io.js"></script>-->
 <!--<script src= "lib/toastr/toastr.js"></script>-->
 
@@ -52,17 +51,17 @@
 
 
 <script>
-
-    System.import("/socket.io/socket.io.js");
-    System.import("lib/jquery-2.0.2.js").then(function(){
-        System.import("lib/toastr/toastr.js");
+	System.import("/socket.io/socket.io.js");
+	System.import("lib/jquery-2.0.2.js").then(function(){
+		System.import("lib/toastr/toastr.js");
     });
 
-	System.import('scripts/main.js').then(function(main) {
-		main.start;
+	System.import('scripts/main.js')
+	.then(function(module) {
+		module.init();
 	});
-
-
+	
+	
 </script>
 </body>
 </html>
