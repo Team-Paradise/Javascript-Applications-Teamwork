@@ -18,3 +18,7 @@ button a:hover{
     width: 800px;
     margin-left: 50px;
 }
+
+.jumbotron{
+    padding: 50px;
+}
