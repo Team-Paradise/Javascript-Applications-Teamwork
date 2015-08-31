@@ -1,4 +1,5 @@
 import {validUserNamePassword, validName, validEmail} from './validator.js';
+import toastr from 'lib/toastr/toastr.js';
 
 export default function signupController() {
     console.log('Hello from SIGN UP controller');

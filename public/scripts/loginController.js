@@ -1,5 +1,5 @@
 import 'lib/jquery/dist/jquery.js';
-import toastr from '../lib/toastr/toastr.js';
+import toastr from 'lib/toastr/toastr.js';
 
 //TODO: config System.js
 function getLoginData() {
@@ -29,8 +29,8 @@ function getLoginData() {
                 },
                 error: function (data) {
 
-                    //toastr.options = {"positionClass": "toast-top-right"};
-                    //toastr.error('Username or password are not valid!');
+                    toastr.options = {"positionClass": "toast-top-right"};
+                    toastr.error('Username or password are not valid!');
                 }
             });
 
