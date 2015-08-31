@@ -4,9 +4,7 @@ import getLoginData from './controllers/loginController.js';
 import switchControllers from './routes.js';
 
 export function init() {
-    var $mainContainer = $('#main-container'),
-        $groupContainer = $('#group-container'),
-		$loginBar = $('#loginBar');
+    var $loginBar = $('#loginBar');
 		
 		document.location.hash = "#/";
 		document.location.hash = "#home";
@@ -30,18 +28,26 @@ export function init() {
      "hideMethod": "fadeOut"
      };*/
 	 
-    $loginBar.load('partials/loginBar.html', function () {
-		getLoginData();
-        
-         /* $('#sign-up-button').on('click', function () {
-         $mainContainer.load('partials/sign-up-form.html');
-         });*/
-    });
+	$loginBar.load('partials/loginBar.html', function () {
+		if(!localStorage.getItem('isUserLogged')) {
+				getLoginData();
+				
+				 /* $('#sign-up-button').on('click', function () {
+				 $mainContainer.load('partials/sign-up-form.html');
+				 });*/
+		} else {
+			console.log('my username is taken from storage');
+			var currentUsername = JSON.parse(localStorage.getItem('user'));
+			$('#loginForm').hide();
+			// TODO: think of handlebars
+			$('#user-profile-dropdown').text(currentUsername);
+			$('#logged-user').show();
+		}
+	});
 	
 	$(window).on('hashchange', function (e) {
         console.log('hash change in window');
         var path = location.hash.replace("#", "");
-		console.log('path- ' + path);
 		switchControllers(path);
     });
 };
