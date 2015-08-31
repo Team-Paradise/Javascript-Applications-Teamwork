@@ -1,4 +1,6 @@
+
 export default function signupGroupController() {
+
     var $groupContainer = $('#group-container');
     $groupContainer.html('');
     var btnSumbit = $('#group-signup-submit');

@@ -12,5 +12,5 @@ module.exports = function (app) {
     // DONE: if not -> send data to database and return success
     app.post('/groups/signup', groupController.signup);
     app.post('/groups/add/member', groupController.addMember);
-
+    app.post('/groups/add/task', groupController.addTask);
 };

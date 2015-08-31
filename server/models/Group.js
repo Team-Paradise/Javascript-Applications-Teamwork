@@ -5,6 +5,12 @@ var mongoose = require('mongoose'),
 require('./User');
 var groupSchema = new Schema({
     name: {type: String},
+    password: {type:String},
+    description: {type: String},
+    git: {type : String},
+    tasks: {type: [String]}, // think of type
+    //events: {type: [String]}, // think of type
+    //meetings: {type: [String]}, // think of type
     members: [{type: ObjectId, ref: 'User'}]
 });
 
