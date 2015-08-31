@@ -1,17 +1,9 @@
 //TODO: #! - for google
-
-//import '../../node_modules/socket.io/socket.io.js';
-//import '../lib/jquery-2.0.2.js';
 import 'lib/jquery/dist/jquery.js';
-import loginController from './loginController.js';
-import routeController from './routes.js';
-import toastr from '../lib/toastr/toastr.js';
-/*export function routes() {
-	routeController.switchControllers();
-}*/
+import getLoginData from './controllers/loginController.js';
+import switchControllers from './routes.js';
 
-
-function init() {
+export function init() {
     var $mainContainer = $('#main-container'),
         $groupContainer = $('#group-container'),
 		$loginBar = $('#loginBar');
@@ -38,28 +30,18 @@ function init() {
      "hideMethod": "fadeOut"
      };*/
 	 
-    var currentUser = {
-        username: '',
-        password: ''
-    };
-    //TODO: make div for this html which should change content on login
     $loginBar.load('partials/loginBar.html', function () {
-		loginController.getLoginData();
+		getLoginData();
         
          /* $('#sign-up-button').on('click', function () {
          $mainContainer.load('partials/sign-up-form.html');
          });*/
     });
-//-------------------------- move to modules -----------------------------------------
-    // Changing html partials
 	
 	$(window).on('hashchange', function (e) {
         console.log('hash change in window');
         var path = location.hash.replace("#", "");
 		console.log('path- ' + path);
-		routeController.switchControllers(path);
+		switchControllers(path);
     });
-
-}
-
-export {init};
+};

@@ -1,4 +1,6 @@
-export function chatController() {
+import io from 'socket.io/socket.io.js';
+
+export default function chatController() {
         var socket = io(),
             $messageField = $("#message"),
             $chat = $("#chat"),
@@ -15,12 +17,13 @@ export function chatController() {
         $("#message").keypress(function (e) {
             var key = e.which;
             if (key == 13) {
-                $("#submitBtn").click();
-                return false;
+                $submitBtn.click();
             }
         });
 
         socket.on('new-message', function (msg) {
-            $chat.append(msg + "<br/>");
+            console.log(msg);
+            $(document.createTextNode(msg)).appendTo($chat);
+            $chat.append('</br>');
         });
     }
