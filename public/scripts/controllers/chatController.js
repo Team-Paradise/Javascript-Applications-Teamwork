@@ -1,4 +1,4 @@
-export function chatController() {
+export default function chatController() {
         var socket = io(),
             $messageField = $("#message"),
             $chat = $("#chat"),

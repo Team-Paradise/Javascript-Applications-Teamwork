@@ -1,15 +1,15 @@
 import 'lib/jquery/dist/jquery.js';
-import homeController from './homeController.js';
-import feedController from './feedController.js';
-import meetingsController from './meetingsController.js';
-import signupController from './signupController.js';
-import signupGroupController from './signupGroupController.js';
-import todoController from './todoController.js';
-import calendarController from './calendarController.js';
-import groupNavController from './groupNavController.js';
-import chatController from './chatController.js';
+import homeController from './controllers/homeController.js';
+import feedController from './controllers/feedController.js';
+import meetingsController from './controllers/meetingsController.js';
+import signupController from './controllers/signupController.js';
+import signupGroupController from './controllers/signupGroupController.js';
+import todoController from './controllers/todoController.js';
+import calendarController from './controllers/calendarController.js';
+import groupNavController from './controllers/groupNavController.js';
+import chatController from './controllers/chatController.js';
 
-import testController from './testController.js';
+import testController from './controllers/testController.js';
 
 function switchControllers(partial) {
 	var $mainContainer = $('#main-container'),

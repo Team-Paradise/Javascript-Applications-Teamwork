@@ -1,3 +1,3 @@
-export function todoController() {
+export default function todoController() {
         console.log('todo page loaded');
     }

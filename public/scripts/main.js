@@ -1,15 +1,8 @@
 //TODO: #! - for google
-
 //import '../../node_modules/socket.io/socket.io.js';
-//import '../lib/jquery-2.0.2.js';
 import 'lib/jquery/dist/jquery.js';
-import loginController from './loginController.js';
+import loginController from './controllers/loginController.js';
 import routeController from './routes.js';
-import toastr from '../lib/toastr/toastr.js';
-/*export function routes() {
-	routeController.switchControllers();
-}*/
-
 
 function init() {
     var $mainContainer = $('#main-container'),
@@ -42,7 +35,7 @@ function init() {
         username: '',
         password: ''
     };
-    //TODO: make div for this html which should change content on login
+	
     $loginBar.load('partials/loginBar.html', function () {
 		loginController.getLoginData();
         
@@ -50,8 +43,6 @@ function init() {
          $mainContainer.load('partials/sign-up-form.html');
          });*/
     });
-//-------------------------- move to modules -----------------------------------------
-    // Changing html partials
 	
 	$(window).on('hashchange', function (e) {
         console.log('hash change in window');
@@ -59,7 +50,6 @@ function init() {
 		console.log('path- ' + path);
 		routeController.switchControllers(path);
     });
-
 }
 
 export {init};
