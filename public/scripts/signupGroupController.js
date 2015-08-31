@@ -1,7 +1,6 @@
-export default function testController() {
+export default function signupGroupController() {
     var $groupContainer = $('#group-container');
     $groupContainer.html('');
-    //CREATE GROUP
     var btnSumbit = $('#group-signup-submit');
     var newGroup;
     btnSumbit.on('click', function () {
@@ -26,24 +25,4 @@ export default function testController() {
             }
         });
     });
-    // ADD MEMBER TO PREV REGISTRED GROUP
-    var btnAdd = $('#add-member-btn');
-    btnAdd.on('click', function () {
-        var member = $('#input-add-member').val();
-
-
-        $.ajax({
-            method: 'POST',
-            url: '/groups/add/member',
-            contentType: 'application/json',
-            data: JSON.stringify({name: newGroup.name, username: member}),
-            success: function (data) {
-                console.log('MEMBER ADDED');
-                console.log(data);
-            },
-            error: function (data) {
-                console.log(data);
-            }
-        });
-    });//end btn onclick
-}
+};

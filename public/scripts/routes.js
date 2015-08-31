@@ -3,11 +3,13 @@ import homeController from './homeController.js';
 import feedController from './feedController.js';
 import meetingsController from './meetingsController.js';
 import signupController from './signupController.js';
+import signupGroupController from './signupGroupController.js';
 import todoController from './todoController.js';
 import calendarController from './calendarController.js';
 import groupNavController from './groupNavController.js';
 import chatController from './chatController.js';
-//import testController from './testController.js';
+
+import testController from './testController.js';
 
 function switchControllers(partial) {
 	var $mainContainer = $('#main-container'),
@@ -19,6 +21,8 @@ function switchControllers(partial) {
                 return {container: $mainContainer, controller: homeController};
             case 'sign-up-form':
                 return {container: $mainContainer, controller: signupController};
+            case 'sign-up-group':
+                return {container: $mainContainer, controller: signupGroupController};
             case 'group-nav':
                 return {container: $mainContainer, controller: groupNavController};
             case 'feed':
@@ -32,8 +36,8 @@ function switchControllers(partial) {
             case 'calendar':
                 return {container: $groupContainer, controller:calendarController};
 				//DEBUG:
-			/*case 'test':
-				return {container: $mainContainer, controller: testController};*/
+			case 'test':
+				return {container: $mainContainer, controller: testController};
             default:
                 return {container: $mainContainer, controller: homeController};
                 break;
