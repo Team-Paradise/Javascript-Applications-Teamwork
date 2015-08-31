@@ -1,5 +1,4 @@
 //TODO: #! - for google
-//import '../../node_modules/socket.io/socket.io.js';
 import 'lib/jquery/dist/jquery.js';
 import getLoginData from './controllers/loginController.js';
 import switchControllers from './routes.js';

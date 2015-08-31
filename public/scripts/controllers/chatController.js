@@ -1,3 +1,5 @@
+import io from 'socket.io/socket.io.js';
+
 export default function chatController() {
         var socket = io(),
             $messageField = $("#message"),
