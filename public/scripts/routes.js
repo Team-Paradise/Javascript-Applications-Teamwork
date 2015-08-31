@@ -11,7 +11,7 @@ import chatController from './controllers/chatController.js';
 
 import testController from './controllers/testController.js';
 
-function switchControllers(partial) {
+export default function switchControllers(partial) {
 	var $mainContainer = $('#main-container'),
         $groupContainer = $('#group-container');
 		
@@ -52,6 +52,4 @@ function switchControllers(partial) {
             action.container.load(url, action.controller);
         }
     }();
-}
-
-export default {switchControllers};
+};

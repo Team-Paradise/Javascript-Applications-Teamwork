@@ -1,10 +1,10 @@
 //TODO: #! - for google
 //import '../../node_modules/socket.io/socket.io.js';
 import 'lib/jquery/dist/jquery.js';
-import loginController from './controllers/loginController.js';
-import routeController from './routes.js';
+import getLoginData from './controllers/loginController.js';
+import switchControllers from './routes.js';
 
-function init() {
+export function init() {
     var $mainContainer = $('#main-container'),
         $groupContainer = $('#group-container'),
 		$loginBar = $('#loginBar');
@@ -31,13 +31,8 @@ function init() {
      "hideMethod": "fadeOut"
      };*/
 	 
-    var currentUser = {
-        username: '',
-        password: ''
-    };
-	
     $loginBar.load('partials/loginBar.html', function () {
-		loginController.getLoginData();
+		getLoginData();
         
          /* $('#sign-up-button').on('click', function () {
          $mainContainer.load('partials/sign-up-form.html');
@@ -48,8 +43,6 @@ function init() {
         console.log('hash change in window');
         var path = location.hash.replace("#", "");
 		console.log('path- ' + path);
-		routeController.switchControllers(path);
+		switchControllers(path);
     });
-}
-
-export {init};
+};
