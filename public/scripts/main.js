@@ -1,15 +1,13 @@
 //TODO: #! - for google
 import 'lib/jquery/dist/jquery.js';
-import getLoginData from './controllers/loginController.js';
+import {loginUser, logoutUser,toggleLoginPartials} from './controllers/loginController.js';
 import switchControllers from './routes.js';
-
 
 export function init() {
     var $loginBar = $('#loginBar');
 		
 		document.location.hash = "#/";
 		document.location.hash = "#home";
-
 		
     /* Some usefull options for toastr:
      toastr.options = {
@@ -32,7 +30,7 @@ export function init() {
 	 
 	$loginBar.load('partials/loginBar.html', function () {
 		if(!localStorage.getItem('isUserLogged')) {
-				getLoginData();
+				loginUser();
 				
 				 /* $('#sign-up-button').on('click', function () {
 				 $mainContainer.load('partials/sign-up-form.html');
@@ -40,13 +38,14 @@ export function init() {
 		} else {
 			console.log('my username is taken from storage');
 			var currentUsername = JSON.parse(localStorage.getItem('user'));
-			$('#loginForm').hide();
-			// TODO: think of handlebars
-			$('#user-profile-dropdown').text(currentUsername);
-			$('#logged-user').show();
+            toggleLoginPartials(currentUsername);
 		}
+        
+        logoutUser();
 	});
-	
+    
+    
+    
 	$(window).on('hashchange', function (e) {
         console.log('hash change in window');
         var path = location.hash.replace("#", "");

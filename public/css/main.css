@@ -3,7 +3,7 @@ body{
 }
 
 .navbar-right .navbar-form input, .navbar-right .navbar-form button {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 button a {
@@ -17,9 +17,6 @@ button a:hover{
 #group-nav{
     width: 800px;
     margin-left: 50px;
-}
-#loginBar{
-
 }
 
 .jumbotron {

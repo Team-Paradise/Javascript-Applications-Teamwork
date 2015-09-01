@@ -1,40 +1,54 @@
 import 'lib/jquery/dist/jquery.js';
+import 'lib/bootstrap/js/dropdown.js';
 import toastr from 'lib/toastr/toastr.js';
 
-export default function getLoginData() {
+function loginUser() {
 	var currentUser = {
         username: '',
         password: ''
     };
-	
-	$('#loginSubmit').on('click', function () {
-            currentUser.username = $('#username').val();
-            currentUser.password = $('#pass').val();
+    
+    $('#loginSubmit').on('click', function () {
+        currentUser.username = $('#username').val();
+        currentUser.password = $('#pass').val();
 
-            // DONE: post data for the user on server, check in db for the user
-            // TODO: set promises
+        // DONE: post data for the user on server, check in db for the user
+        // TODO: set promises
 
-            $.ajax({
-                url: '/User',
-                contentType: 'application/json',
-                data: currentUser,
-                success: function (data) {
-                    console.log(data);
-                    $('#loginForm').hide();
-                    // TODO: think of handlebars
-                    $('#user-profile-dropdown').text(data.username);
-                    $('#logged-user').show();
-					
-					localStorage.setItem('isUserLogged', true);	//when we set button 'logout' on its click this will be set to 'false';
-					localStorage.setItem('user', JSON.stringify(data.username));
-                },
-                error: function (data) {
+        $.ajax({
+            url: '/User',
+            contentType: 'application/json',
+            data: currentUser,
+            success: function (data) {
+                console.log(data);
+                toggleLoginPartials(data.username);
+                
+                localStorage.setItem('isUserLogged', true);
+                localStorage.setItem('user', JSON.stringify(data.username));
+            },
+            error: function (data) {
 
-                    toastr.options = {"positionClass": "toast-top-right"};
-                    toastr.error('Username or password are not valid!');
-                }
-            });
-
-            return false;
+                toastr.options = {"positionClass": "toast-top-right"};
+                toastr.error('Username or password are not valid!');
+            }
         });
-};
+
+        return false;
+    });	
+}
+
+function logoutUser() {
+    $('#logout-button').on('click', function () {
+        toggleLoginPartials();
+        localStorage.clear();
+    });
+}
+
+function toggleLoginPartials(data) {
+    $('#loginForm').toggle();
+    // TODO: think of handlebars
+    $('#user-profile-dropdown').text(data);
+    $('#logged-user').toggle();
+}
+
+export {loginUser, logoutUser, toggleLoginPartials}
