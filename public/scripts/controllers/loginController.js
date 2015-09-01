@@ -24,6 +24,9 @@ export default function getLoginData() {
                     // TODO: think of handlebars
                     $('#user-profile-dropdown').text(data.username);
                     $('#logged-user').show();
+					
+					localStorage.setItem('isUserLogged', true);	//when we set button 'logout' on its click this will be set to 'false';
+					localStorage.setItem('user', JSON.stringify(data.username));
                 },
                 error: function (data) {
 
