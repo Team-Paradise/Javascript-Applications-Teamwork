@@ -36,7 +36,7 @@ export default function testController() {
             method: 'POST',
             url: '/groups/add/member',
             contentType: 'application/json',
-            data: JSON.stringify({name: newGroup.name, username: member}),
+            data: JSON.stringify({name: 'Paradise', username: member}),
             success: function (data) {
                 console.log('MEMBER ADDED');
                 console.log(data);
