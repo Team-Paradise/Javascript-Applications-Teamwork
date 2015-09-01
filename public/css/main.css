@@ -2,9 +2,10 @@ body{
     margin-top: 100px;
 }
 
- input {
-    margin-right: 10px;
+.navbar-right .navbar-form input, .navbar-right .navbar-form button {
+  margin-right: 10px;
 }
+
 button a {
     color: white;
 }
@@ -13,11 +14,32 @@ button a:hover{
     text-decoration: none;
 }
 
-/*TODO: Krasiii help :D */
 #group-nav{
     width: 800px;
     margin-left: 50px;
 }
 #loginBar{
 
+}
+
+.jumbotron {
+    border-radius: 10px;
+    margin: 30px;
+    max-width: whatever;
+}
+
+.row {
+    margin: 50px;
+    font-size: 20px;
+}
+
+.row .content-container {
+    margin-top: 40px;
+}
+
+footer {
+    margin-left:30px;
+    margin-right:30px;
+    border-top: 1px solid #CCC;
+    padding-top: 10px;
 }
