@@ -87,5 +87,29 @@ module.exports = {
             }
         )
         ;
+    },
+    getTasks: function(req,res,next){
+        Group.findOne({name:req.query.name}, function(err,data){
+            console.log(req.query.name);
+            console.log(data);
+            if(err){
+                res.sendStatus(400);
+            }
+            console.log(data);
+            console.log('null??');
+            res.json({tasks: data.tasks});
+        })
+    },
+    getFeed: function(req, res, next){
+
+    },
+    getMeetings: function(req, res, next){
+
+    },
+    getCalendar: function(req, res, next){
+
+    },
+    getGenericInfo: function(req, res, next){
+
     }
 }

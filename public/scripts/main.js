@@ -3,13 +3,15 @@ import 'lib/jquery/dist/jquery.js';
 import getLoginData from './controllers/loginController.js';
 import switchControllers from './routes.js';
 
-export function init() {
+export  function init() {
     var $mainContainer = $('#main-container'),
         $groupContainer = $('#group-container'),
 		$loginBar = $('#loginBar');
-		
-		document.location.hash = "#/";
-		document.location.hash = "#home";
+    /*var l = document.location.hash;
+    document.location.hash = "#/";
+    document.location.hash = l;*/
+    document.location.hash = "#/";
+    document.location.hash = "#home";
 		
     /* Some usefull options for toastr:
      toastr.options = {

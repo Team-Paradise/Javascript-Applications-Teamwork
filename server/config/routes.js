@@ -5,6 +5,12 @@ module.exports = function (app) {
 
     app.get('/User', userController.login);
 
+    app.get('/groups', groupController.getGenericInfo);
+    app.get('/groups/feed',groupController.getFeed);
+    app.get('/groups/meetings',groupController.getMeetings);
+    app.get('/groups/tasks',groupController.getTasks);
+    app.get('/groups/calendar', groupController.getCalendar);
+
     app.post('/signup', userController.signup);
 
     // TODO: simple validation of fortmat of email. pass...
@@ -13,4 +19,5 @@ module.exports = function (app) {
     app.post('/groups/signup', groupController.signup);
     app.post('/groups/add/member', groupController.addMember);
     app.post('/groups/add/task', groupController.addTask);
+
 };

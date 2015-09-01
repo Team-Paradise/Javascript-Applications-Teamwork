@@ -2,9 +2,9 @@
 System.config({
     transpiler: 'babel',
 	babelOptions: {
-		optional: [
+		/*optional: [
 			"runtime"
-		]
+		]*/
 	},
     map: {
         babel: 'lib/babel-core/browser.js',

@@ -1,5 +1,9 @@
+import handlebars from 'lib/handlebars/handlebars.js';
+
 export default function todoController() {
     // TODO: think where to store wich is the current user + open group
+
+
     var currentGroupNameTest = "Paradise";
     console.log('todo page loaded');
   /*  $("#sortable").sortable();
@@ -73,7 +77,7 @@ export default function todoController() {
         });
 
         // add to done
-        for (i = 0; i < myArray.length; i++) {
+        for (var i = 0; i < myArray.length; i++) {
             $('#done-items').append('<li>' + myArray[i] + '<button class="btn btn-default btn-xs pull-right  remove-item"><span class="glyphicon glyphicon-remove"></span></button></li>');
         }
 
