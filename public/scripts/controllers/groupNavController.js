@@ -7,7 +7,7 @@ export default function groupNavController() {
     $switchGroup.on('click', 'li', function(e){
         var $target = $(e.target);
 
-        localStorage.setItem('current-group', $target.text());
+        localStorage.setItem('current-group',JSON.stringify( $target.text()));
 
     });
 

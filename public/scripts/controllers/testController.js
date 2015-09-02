@@ -33,12 +33,19 @@ export default function testController() {
     btnAdd.on('click', function () {
         var member = $('#input-add-member').val();
 
-
+        var queryAddMember = {
+            name: JSON.parse(localStorage.getItem('current-group')),
+            username: member
+        };
+        var queryAddGroup = {
+            username: member,
+            group: JSON.parse(localStorage.getItem('current-group'))
+        };
         $.ajax({
             method: 'POST',
             url: '/groups/add/member',
             contentType: 'application/json',
-            data: JSON.stringify({name: 'Paradise', username: member}),
+            data: JSON.stringify(queryAddMember),
             success: function (data) {
                 console.log('MEMBER ADDED');
                 // TODO: switch member with data.??
@@ -54,12 +61,12 @@ export default function testController() {
             method: 'POST',
             url: '/users/add/group',
             contentType: 'application/json',
-            data: JSON.stringify({username:member, group: 'Paradise' }),
-            success: function(data){
+            data: JSON.stringify(queryAddGroup),
+            success: function (data) {
                 console.log('GRPOUP ADDED');
                 console.log(data);
             },
-            error: function(data){
+            error: function (data) {
                 console.log('Error on adding the user as group member');
                 console.log(data);
             }

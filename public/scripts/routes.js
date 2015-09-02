@@ -33,7 +33,11 @@ export default function switchControllers(partial) {
                     data = {container: $mainContainer, contentDataRoute: '', controller: signupGroupController};
                     break;
                 case 'group-nav':
-                    data = {container: $mainContainer, contentDataRoute: '/users/groups', controller: groupNavController};
+                    data = {
+                        container: $mainContainer,
+                        contentDataRoute: '/users/groups',
+                        controller: groupNavController
+                    };
                     break;
                 case 'feed':
                     data = {container: $groupContainer, contentDataRoute: '', controller: feedController};
@@ -72,26 +76,32 @@ export default function switchControllers(partial) {
 
     function getContext(action) {
         var promise = new Promise(function (resolve, reject) {
-            var route = action.contentDataRoute;
-            $.ajax({
-                url: route,
-                contentType: 'application/json',
-                data: {name: 'Paradise', user: JSON.parse(localStorage.getItem('user'))},
-                success: function (data) {
-                    console.log('SUCCESS!!!!');
-                    console.log(route);
-                    console.log(data);
-                    console.log(data);
+                    var route = action.contentDataRoute;
+                    var query = {
+                        name: JSON.parse(localStorage.getItem('current-group')),
+                        user: JSON.parse(localStorage.getItem('user'))
+                    }
+                    $.ajax({
+                        url: route,
+                        contentType: 'application/json',
+                        data: query,
+                        success: function (data) {
+                            console.log('SUCCESS!!!!');
+                            console.log(route);
+                            console.log(data);
+                            console.log(data);
 
-                    resolve({action:action, info: data});
-                },
-                error: function (err) {
-                    console.log('ERROR' + err);
-                    toastr.error('Error: ' + err);
-                    reject(err);
+                            resolve({action: action, info: data});
+                        },
+                        error: function (err) {
+                            console.log('ERROR' + err);
+                            toastr.error('Error: ' + err);
+                            reject(err);
+                        }
+                    })
                 }
-            })
-        });
+            )
+            ;
         return promise;
     }
 
@@ -130,7 +140,7 @@ export default function switchControllers(partial) {
                         console.log(data2.info);
 
                         test(data2.action, data2.info, url)
-                        .then(function(data3){
+                            .then(function (data3) {
                                 console.log('THIRD!!!');
                                 console.log(data3);
                                 data3.controller();
@@ -140,4 +150,5 @@ export default function switchControllers(partial) {
 
 
     }();
-};
+}
+;

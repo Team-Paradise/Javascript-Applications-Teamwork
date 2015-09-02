@@ -13,7 +13,7 @@ export default function signupGroupController() {
             description: $('#input-group-desc').val(),
             git: $('#input-git-link').val()
         };
-
+localStorage.setItem('current-group',JSON.stringify(newGroup.name));
         $.ajax({
             method: "POST",
             url: '/groups/signup',
