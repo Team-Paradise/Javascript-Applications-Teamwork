@@ -1,5 +1,8 @@
 import toastr from 'lib/toastr/toastr.js';
 import {validUserNamePassword, validName, validEmail} from '../validator.js';
+import {addClient} from './../controllers/chatDataManager.js';
+
+
 
 export default function signupController() {
     console.log('Hello from SIGN UP controller');
@@ -77,9 +80,11 @@ export default function signupController() {
                     console.log('POST success! ');
                     console.log(data);
                     console.log('-----');
+
                     // todo: save token and username to local storage
                     localStorage.setItem('user', JSON.stringify(data.username));
                     localStorage.setItem('authKey', JSON.stringify(data.authKey));
+                    addClient(data);
                     // todo: save tokan also where Zlatko save the user name in local storage!!!
                 },
                 error: function (data) {

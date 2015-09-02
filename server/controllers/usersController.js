@@ -46,7 +46,8 @@ module.exports = {
                 var newUser = req.body;
                 newUser.authKey = generateAuthKey(newUser.username);
                 User.create(newUser);
-
+                console.log('----------SIGN UP');
+                console.log(newUser);
                 res.json({username: newUser.username, authKey: newUser.authKey});
             }
         });

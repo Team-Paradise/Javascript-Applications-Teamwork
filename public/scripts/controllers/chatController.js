@@ -6,6 +6,8 @@ export default function chatController() {
             $chat = $("#chat"),
             $submitBtn = $("#submitBtn");
 
+    socket.emit('')
+
         $submitBtn.on('click', function (ev) {
             ev.preventDefault();
             if ($messageField.val()) {
@@ -21,9 +23,10 @@ export default function chatController() {
             }
         });
 
-        socket.on('new-message', function (msg) {
+        socket.on('new-message', function (username, msg) {
             console.log(msg);
             $(document.createTextNode(msg)).appendTo($chat);
-            $chat.append('</br>');
+            $chat.append('<b>' + username + ': </b>' + msg + '<br>');
+
         });
     }

@@ -1,4 +1,4 @@
-
+import {addRoom} from './../controllers/chatDataManager.js';
 export default function signupGroupController() {
 
     var $groupContainer = $('#group-container');
@@ -20,6 +20,7 @@ export default function signupGroupController() {
             contentType: 'application/json',
             data: JSON.stringify(newGroup),
             success: function (data) {
+                addRoom(data.name);
                 console.log(data);
             },
             error: function (data) {

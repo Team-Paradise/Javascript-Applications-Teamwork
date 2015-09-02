@@ -6,9 +6,9 @@ module.exports = function (app) {
     app.get('/User', userController.login);
 
     app.get('/groups', groupController.getGenericInfo);
-    app.get('/groups/feed',groupController.getFeed);
-    app.get('/groups/meetings',groupController.getMeetings);
-    app.get('/groups/tasks',groupController.getTasks);
+    app.get('/groups/feed', groupController.getFeed);
+    app.get('/groups/meetings', groupController.getMeetings);
+    app.get('/groups/tasks', groupController.getTasks);
     app.get('/groups/calendar', groupController.getCalendar);
 
     app.post('/signup', userController.signup);
@@ -20,9 +20,12 @@ module.exports = function (app) {
     app.post('/groups/add/member', groupController.addMember);
     app.post('/groups/add/task', groupController.addTask);
 
-    app.post('/users/add/group', function(req, res){
+    app.post('/users/add/group', function (req, res) {
         console.log(req.body);
         res.json(req.body);
     });
 
+    /*app.post('/groups/messages', groupController.postMessages);
+    app.get('/groups/messages', groupController.getMessages)
+*/
 };

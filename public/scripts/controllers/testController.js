@@ -1,3 +1,5 @@
+import {joinRoom} from './../controllers/chatDataManager.js';
+
 export default function testController() {
     var $groupContainer = $('#group-container');
     $groupContainer.html('');
@@ -39,6 +41,8 @@ export default function testController() {
             data: JSON.stringify({name: 'Paradise', username: member}),
             success: function (data) {
                 console.log('MEMBER ADDED');
+                // TODO: switch member with data.??
+                joinRoom(member, data.name);
                 console.log(data);
             },
             error: function (data) {
