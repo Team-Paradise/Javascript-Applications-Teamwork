@@ -10,7 +10,7 @@ module.exports = function (app) {
     app.get('/groups/meetings', groupController.getMeetings);
     app.get('/groups/tasks', groupController.getTasks);
     app.get('/groups/calendar', groupController.getCalendar);
-
+    app.get('/users/groups', groupController.listGroups);
     app.post('/signup', userController.signup);
 
     // TODO: simple validation of fortmat of email. pass...
@@ -26,6 +26,6 @@ module.exports = function (app) {
     });
 
     /*app.post('/groups/messages', groupController.postMessages);
-    app.get('/groups/messages', groupController.getMessages)
-*/
+     app.get('/groups/messages', groupController.getMessages)
+     */
 };

@@ -97,40 +97,70 @@ module.exports = {
     },
 
     /*getMessages: function (req, res, next) {
-        // group, sender, msg
-        Group.findOne({name: req.query.name}, function (err, group) {
+     // group, sender, msg
+     Group.findOne({name: req.query.name}, function (err, group) {
+     if (err) {
+     res.sendStatus(400);
+     }
+
+     res.json({messages: group.messages});
+     })
+     },
+
+     postMessages: function (req, res, next) {
+     console.log(req.body);
+     Group.findOne({name: req.body.name}, function (err, group) {
+     if (err) {
+     res.sendStatus(400);
+     }
+     console.log(req.body);
+
+     Group.findByIdAndUpdate(
+     group._id,
+     {$push: {"messages": req.body}}, // sender & msg
+     {safe: true, upsert: true},
+     function (err, group) {
+     if (err) {
+     console.log('Error on updating tasks : ' + err);
+     res.sendStatus(400);
+     }
+     res.json({sender: group.messages.sender, mag: group.messages.msg});
+     console.log(group);
+     }
+     );
+     });
+     },*/
+
+    listGroups: function (req, res, next) {
+        console.log('---------LIST GROUPS');
+        console.log(req.query.user);
+
+        User.findOne({
+            'username': req.query.user
+        }, function (err, user) {
             if (err) {
                 res.sendStatus(400);
-            }
+            } else if (user) {
+                var groupIDs = user.groups;
 
-            res.json({messages: group.messages});
-        })
-    },
 
-    postMessages: function (req, res, next) {
-        console.log(req.body);
-        Group.findOne({name: req.body.name}, function (err, group) {
-            if (err) {
-                res.sendStatus(400);
-            }
-            console.log(req.body);
-
-            Group.findByIdAndUpdate(
-                group._id,
-                {$push: {"messages": req.body}}, // sender & msg
-                {safe: true, upsert: true},
-                function (err, group) {
-                    if (err) {
-                        console.log('Error on updating tasks : ' + err);
-                        res.sendStatus(400);
+                Group.find({
+                    '_id': { $in: groupIDs}
+                }, function(err, groups){
+                    if(err){
+                        console.log(err);
+                        res.sendStatus(404);
                     }
-                    res.json({sender: group.messages.sender, mag: group.messages.msg});
-                    console.log(group);
-                }
-            );
-        });
-    },*/
+                    console.log(groups);
+                    console.log('--------BEFORE RES');
+                    res.json({info: groups});
+                });
 
+            } else {
+                res.sendStatus(404);
+            }
+        });
+    },
     getFeed: function (req, res, next) {
 
     },

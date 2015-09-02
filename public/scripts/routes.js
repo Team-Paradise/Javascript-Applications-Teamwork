@@ -33,7 +33,7 @@ export default function switchControllers(partial) {
                     data = {container: $mainContainer, contentDataRoute: '', controller: signupGroupController};
                     break;
                 case 'group-nav':
-                    data = {container: $mainContainer, contentDataRoute: '', controller: groupNavController};
+                    data = {container: $mainContainer, contentDataRoute: '/users/groups', controller: groupNavController};
                     break;
                 case 'feed':
                     data = {container: $groupContainer, contentDataRoute: '', controller: feedController};
@@ -76,14 +76,14 @@ export default function switchControllers(partial) {
             $.ajax({
                 url: route,
                 contentType: 'application/json',
-                data: {name: 'Paradise'},
+                data: {name: 'Paradise', user: JSON.parse(localStorage.getItem('user'))},
                 success: function (data) {
                     console.log('SUCCESS!!!!');
                     console.log(route);
                     console.log(data);
-                    console.log(data.tasks);
+                    console.log(data);
 
-                    resolve({action:action, tasks: data.tasks});
+                    resolve({action:action, info: data});
                 },
                 error: function (err) {
                     console.log('ERROR' + err);
@@ -127,9 +127,9 @@ export default function switchControllers(partial) {
                 getContext(data)
                     .then(function (data2) {
                         console.log('SECOND');
-                        console.log(data2);
+                        console.log(data2.info);
 
-                        test(data2.action, data2.tasks, url)
+                        test(data2.action, data2.info, url)
                         .then(function(data3){
                                 console.log('THIRD!!!');
                                 console.log(data3);
