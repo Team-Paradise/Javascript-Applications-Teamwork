@@ -45,5 +45,20 @@ export default function testController() {
                 console.log(data);
             }
         });
+
+        $.ajax({
+            method: 'POST',
+            url: '/users/add/group',
+            contentType: 'application/json',
+            data: JSON.stringify({username:member, group: 'Paradise' }),
+            success: function(data){
+                console.log('GRPOUP ADDED');
+                console.log(data);
+            },
+            error: function(data){
+                console.log('Error on adding the user as group member');
+                console.log(data);
+            }
+        });
     });//end btn onclick
 }
