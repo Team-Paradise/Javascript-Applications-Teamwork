@@ -1,0 +1,11 @@
+#datetimepicker-container {
+    margin: 0 50px 20px 50px;
+    width: 50%;
+}
+#datetimepicker-container .demo-section {
+    margin-bottom: 20px;
+}
+
+#datetimepicker-container #btn-meeting-submit {
+    margin-top:20px;
+}

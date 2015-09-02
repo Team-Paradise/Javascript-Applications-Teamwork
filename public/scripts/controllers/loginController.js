@@ -25,6 +25,7 @@ function loginUser() {
                 
                 localStorage.setItem('isUserLogged', true);
                 localStorage.setItem('user', JSON.stringify(data.username));
+                localStorage.setItem('authKey', JSON.stringify(data.authKey));
             },
             error: function (data) {
 
