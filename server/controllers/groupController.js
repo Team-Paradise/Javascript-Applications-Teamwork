@@ -25,7 +25,7 @@ module.exports = {
         });
     },
     addMember: function (req, res, next) {
-        var member;
+        var member, newGroup;
 
         User.findOne({
             username: req.body.username
@@ -42,30 +42,20 @@ module.exports = {
                 console.log('ERROR ON POPULATING: ' + err);
                 res.sendStatus(400); // TODO: check the real err code
             }
-            console.log('POPULATE');
+
             group.members.push(member);
             group.save();
-            console.log(group);
+
+            member.groups.push(group);
+            member.save();
+
             res.json({name: group.name, members: group.members});
+
         });
+
     },
-    /*addTask: function(req, res, next){
-     Group.findOne({name: req.body.name}).populate('tasks').exec(function(err, group){
-     if(err){
-     console.log('Error on server saving task, no such group found: ' + err);
-     res.sendStatus(400);
-     }
-     console.log('REQUEST:');
-     console.log(req.body);
-     console.log(req.body.todo);
-     console.log(req.query);
-     console.log('--end request---');
-     group.tasks.push(req.body.task);
-     group.save();
-     console.log(group);
-     res.json({name: group.name, tasks: group.tasks});
-     });
-     }*/
+
+
     addTask: function (req, res, next) {
         Group.findOne({name: req.body.name}, function (err, info) {
                 if (err) return res.send("contact create error: " + err);
@@ -75,8 +65,8 @@ module.exports = {
                     info._id,
                     {$push: {"tasks": req.body.task}},
                     {safe: true, upsert: true},
-                    function(err, model) {
-                        if(err){
+                    function (err, model) {
+                        if (err) {
                             console.log('Error on updating tasks : ' + err);
                             res.sendStatus(400);
                         }
@@ -88,11 +78,11 @@ module.exports = {
         )
         ;
     },
-    getTasks: function(req,res,next){
-        Group.findOne({name:req.query.name}, function(err,data){
+    getTasks: function (req, res, next) {
+        Group.findOne({name: req.query.name}, function (err, data) {
             console.log(req.query.name);
             console.log(data);
-            if(err){
+            if (err) {
                 res.sendStatus(400);
             }
             console.log(data);
@@ -100,16 +90,16 @@ module.exports = {
             res.json({tasks: data.tasks});
         })
     },
-    getFeed: function(req, res, next){
+    getFeed: function (req, res, next) {
 
     },
-    getMeetings: function(req, res, next){
+    getMeetings: function (req, res, next) {
 
     },
-    getCalendar: function(req, res, next){
+    getCalendar: function (req, res, next) {
 
     },
-    getGenericInfo: function(req, res, next){
+    getGenericInfo: function (req, res, next) {
 
     }
 }

@@ -1,7 +1,11 @@
 var User = require('mongoose').model('User');
 
+function generateAuthKey(username) {
+    return username + '545454';
+}
+
 module.exports = {
-    login:function (req, res, next) {
+    login: function (req, res, next) {
         console.log('been here');
         //middleware
         //TODO: module + promises -> send response only when the query to db is ready!
@@ -40,15 +44,10 @@ module.exports = {
             }
             else {
                 var newUser = req.body;
-                User.create({
-                    username: newUser.username,
-                    firstName: 'Test',
-                    lastName: 'Testov',
-                    password: newUser.password,
-                    email: newUser.email
-                });
+                newUser.authKey = generateAuthKey(newUser.username);
+                User.create(newUser);
 
-                res.json({username: newUser.username, password: newUser.password});
+                res.json({username: newUser.username, authKey: newUser.authKey});
             }
         });
     }

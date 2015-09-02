@@ -20,4 +20,9 @@ module.exports = function (app) {
     app.post('/groups/add/member', groupController.addMember);
     app.post('/groups/add/task', groupController.addTask);
 
+    app.post('/users/add/group', function(req, res){
+        console.log(req.body);
+        res.json(req.body);
+    });
+
 };

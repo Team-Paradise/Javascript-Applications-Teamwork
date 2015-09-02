@@ -9,7 +9,8 @@ export default function signupController() {
         $email = $('#inputEmail'),
         $firstName = $('#firstName'),
         $lastName = $('#lastName'),
-        $signUpSubmit = $('#signUpSubmit');
+        $signUpSubmit = $('#signUpSubmit'),
+        $aboutme = $('#aboutMe');
 
     $username.focusout(function () {
         if (!validUserNamePassword($username.val())) {
@@ -25,28 +26,28 @@ export default function signupController() {
         }
     });
 
-    $passConfirm.focusout(function() {
+    $passConfirm.focusout(function () {
         if ($passConfirm.val() !== $password.val()) {
             $passConfirm.val('');
             // TODO tooltip
         }
     });
 
-    $email.focusout(function() {
+    $email.focusout(function () {
         if (!validEmail($email.val())) {
             $email.val('');
             // TODO tooltip
         }
     })
 
-    $firstName.focusout(function() {
+    $firstName.focusout(function () {
         if (!validName($firstName.val())) {
             $firstName.val('');
             // TODO tooltip
         }
     });
 
-    $lastName.focusout(function() {
+    $lastName.focusout(function () {
         if (!validName($lastName.val())) {
             $lastName.val('');
             // TODO tooltip
@@ -60,10 +61,11 @@ export default function signupController() {
             validName($firstName.val()) && validName($lastName.val())) {
             var newUser = {
                 username: $username.val(),
-                email: $email.val(),
-                password: $password.val(),
                 firstName: $firstName.val(),
-                lastName: $lastName.val()
+                lastName: $lastName.val(),
+                password: $password.val(),
+                email: $email.val(),
+                aboutMe: $aboutme.val()
             };
             console.log(newUser);
             $.ajax({
@@ -75,6 +77,10 @@ export default function signupController() {
                     console.log('POST success! ');
                     console.log(data);
                     console.log('-----');
+                    // todo: save token and username to local storage
+                    localStorage.setItem('user', JSON.stringify(data.username));
+                    localStorage.setItem('authKey', JSON.stringify(data.authKey));
+                    // todo: save tokan also where Zlatko save the user name in local storage!!!
                 },
                 error: function (data) {
                     switch (data.status) {

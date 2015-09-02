@@ -14,6 +14,8 @@ var groupSchema = new Schema({
     members: [{type: ObjectId, ref: 'User'}]
 });
 
+
+
 var Group = mongoose.model('Group', groupSchema, 'groups');
 
 var testMember;

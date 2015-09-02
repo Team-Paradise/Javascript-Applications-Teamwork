@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
+
 // validation = require('../utils/validation');
 
 var userSchema = new Schema({
@@ -9,7 +10,8 @@ var userSchema = new Schema({
     lastName: {type: String},
     password: {type: String},
     email: {type: String},
-    groups: {type:ObjectId, ref: 'Group' }
+    aboutMe: {type: String},
+    groups: [{type: ObjectId, ref: 'Group'}]
     //TODO groups
 });
 
@@ -42,7 +44,7 @@ module.exports.createInitialUsers = function () {
                 firstName: 'Mariya',
                 lastName: 'Steffanova',
                 password: '12345',
-                email: 'solara@gmail.com',
+                email: 'solara@gmail.com'
 
             })
                 .then(function (user) {
