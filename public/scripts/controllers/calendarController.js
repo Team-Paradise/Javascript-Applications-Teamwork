@@ -1,3 +1,9 @@
+import 'lib/kendo.all.min.js';
+
 export default function calendarController() {
-        console.log('calendar page loaded');
-    }
+    $(function(){
+        $("#scheduler").kendoScheduler({
+            height: 600,
+        });
+    });
+}
