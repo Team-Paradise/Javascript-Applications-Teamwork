@@ -17,7 +17,7 @@ function loginUser() {
         // TODO: set promises
 
         $.ajax({
-            url: '/User',
+            url: 'User',
             contentType: 'application/json',
             data: currentUser,
             success: function (data) {

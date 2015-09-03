@@ -49,7 +49,7 @@ export default function switchControllers(partial) {
                     };
                     break;
                 case 'todo-list':
-                    data = {container: $groupContainer, contentDataRoute: '/groups/tasks', controller: todoController};
+                    data = {container: $groupContainer, contentDataRoute: 'groups/tasks', controller: todoController};
                     break;
                 case 'chat':
                     data = {container: $groupContainer, contentDataRoute: '', controller: chatController};

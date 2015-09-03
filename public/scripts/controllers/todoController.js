@@ -95,7 +95,7 @@ export default function todoController() {
     function saveTodo(groupName, todo){
         $.ajax({
             method: 'POST',
-            url:'/groups/add/task',
+            url:'groups/add/task',
             contentType: 'application/json',
             data: JSON.stringify({name: groupName, task: todo}),
             success: function(data)
