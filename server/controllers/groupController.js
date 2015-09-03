@@ -145,9 +145,9 @@ module.exports = {
 
 
                 Group.find({
-                    '_id': { $in: groupIDs}
-                }, function(err, groups){
-                    if(err){
+                    '_id': {$in: groupIDs}
+                }, function (err, groups) {
+                    if (err) {
                         console.log(err);
                         res.sendStatus(404);
                     }
@@ -164,6 +164,27 @@ module.exports = {
     getFeed: function (req, res, next) {
 
     },
+
+    addMeeting: function (req, res, next) {
+        //req.body
+        var newMeeting = {
+            date: req.body.date,
+            about: req.body.about
+        };
+
+        Group.findOne({name: req.body.group}).populate('meetings').exec(function (err, group) {
+            if (err) {
+
+                res.sendStatus(404);
+            }
+            group.meetings.push(newMeeting);
+            group.save();
+
+            res.json({meetings: newMeeting});
+        })
+
+    },
+
     getMeetings: function (req, res, next) {
 
     },

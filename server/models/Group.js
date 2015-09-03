@@ -10,12 +10,14 @@ var groupSchema = new Schema({
     git: {type: String},
     tasks: {type: [String]}, // think of type
     //events: {type: [String]}, // think of type
-    //meetings: {type: [String]}, // think of type
-    messages: [
-        {
-            sender: {type: String, required: true},
-            msg: {type: String, required: true}
-        }],
+    meetings: [{
+        date: {type: String, required:true},
+        about: {type: String, required:true}
+    }], // think of type
+    messages: [{
+        sender: {type: String, required: true},
+        msg: {type: String, required: true}
+    }],
     members: [{type: ObjectId, ref: 'User'}]
 });
 

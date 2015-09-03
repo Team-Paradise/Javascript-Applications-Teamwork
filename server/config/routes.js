@@ -22,6 +22,8 @@ module.exports = function (app) {
     app.post('/groups/signup', groupController.signup);
     app.post('/groups/add/member', groupController.addMember);
     app.post('/groups/add/task', groupController.addTask);
+    app.post('/groups/meetings', groupController.addMeeting);
+
 
     app.post('/users/add/group', function (req, res) {
         console.log(req.body);

@@ -20,22 +20,27 @@ export default function meetingsController() {
         $('#btn-meeting-submit').on('click', function() {
             var about = $('#meeting-information').val();
             meetingInformation.about = about;
+            meetingInformation.group = JSON.parse(localStorage.getItem('current-group'));
             toastr.options = {"positionClass": "toast-top-center"};
             toastr.success('You successfully arranged meeting on ' + meetingInformation.date);
-            
-            /*$.ajax({
+            console.log(meetingInformation);
+            $.ajax({
                 url: '/groups/meetings',
                 method: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(meetingInformation),
                 success: function (data) {
+                    console.log('-------MEETING');
+                    console.log(data);
                     console.log('successfull meeting request'); // Do something with data
                 },
                 error: function (data) {
+                    console.log('--------------ERROR--------MEETING');
+                    console.log(data);
                     toastr.options = {"positionClass": "toast-top-center"};
                     toastr.error('Invalid meetings data!');
                 }
-            });*/
+            });
         });
     });
 };
