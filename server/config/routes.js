@@ -1,8 +1,11 @@
 var User = require('mongoose').model('User');
 var userController = require('../controllers/usersController'),
     groupController = require('../controllers/groupController');
-module.exports = function (app) {
 
+module.exports = function (app) {
+    console.log('------------------------------ROUTES before require AUTH');
+    require('./../utils/validation')(app);
+    console.log('------------------------------ROUTES after require AUTH');
     app.get('/User', userController.login);
 
     app.get('/groups', groupController.getGenericInfo);

@@ -4,6 +4,7 @@ var io = require('socket.io'),
 
 module.exports = function (server) {
     io = io(server);
+   // io.listen(app);
     io.sockets.on('connection', function (socket) {
         socket.on('sent-message', function (data) {  // data = message
             io.sockets.in(socket.room).emit('new-message',socket.username, data);
