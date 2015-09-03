@@ -180,7 +180,7 @@ module.exports = {
             group.meetings.push(newMeeting);
             group.save();
 
-            res.json({meetings: newMeeting});
+            res.json({meeting: newMeeting});
         })
 
     },
