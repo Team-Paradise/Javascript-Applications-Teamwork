@@ -13,7 +13,6 @@ import membersController from './controllers/membersController.js';
 import toastr from 'lib/toastr/toastr.js';
 
 
-import handlebars from 'lib/handlebars/handlebars.js';
 
 
 
