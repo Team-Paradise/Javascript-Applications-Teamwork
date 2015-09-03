@@ -22,8 +22,8 @@ function auth(req, res, next) {
 }
 
 module.exports = function(app) {
-    console.log('------------AUTH');
-    app.get('/', auth);
-    app.get('/groups', auth);
-    app.get('/users', auth);
+   // console.log('------------AUTH');
+   // app.get('/', auth);
+   // app.get('/groups', auth);
+   // app.get('/users', auth);
 };

@@ -37,7 +37,7 @@ export default function switchControllers(partial) {
                 case 'group-nav':
                     data = {
                         container: $mainContainer,
-                        contentDataRoute: '/users/groups',
+                        contentDataRoute: 'users/groups',
                         controller: groupNavController
                     };
                     break;
@@ -95,8 +95,8 @@ export default function switchControllers(partial) {
                             resolve({action: action, info: data});
                         },
                         error: function (err) {
-                            console.log('ERROR' + err);
-                            toastr.error('Error: ' + err);
+                            var message = err.message || 'Something happend..';
+                            toastr.error('Error: ' + message);
                             reject(err);
                         }
                     })
@@ -134,8 +134,12 @@ export default function switchControllers(partial) {
             .then(function (data) {
 
                 getContext(data)
-                    .then(function (data2) {
-
+                    .then(function (data2, err) {
+                        if (err) {
+                            var message = err.message || 'Something happend.. line 139';
+                            toastr.error(message);
+                            return;
+                        }
                         test(data2.action, data2.info, url)
                             .then(function (data3) {
 

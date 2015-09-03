@@ -4,7 +4,10 @@ var Group = require('mongoose').model('Group'),
 module.exports = {
     signup: function (req, res, next) {
         var newGroup = req.body;
-        console.log(newGroup);
+        if (!newGroup.name) {
+            res.status(400).json({message: 'Please enter username!'});
+        }
+        // console.log(newGroup);
         Group.findOne({
             'name': newGroup.name
         }, function (err, user) {
@@ -12,13 +15,14 @@ module.exports = {
                 console.log('Error searching in db: ' + err);
                 res.sendStatus(404);
             } else if (user) {
-                res.sendStatus(422);
+                res.status(422).json({message: 'Group with this name already exist!'});
             }
             else {
-
                 Group.create({
                     name: newGroup.name,
-                    members: []
+                    members: [],
+                    tasks: [],
+                    meetings: []
                 });
                 res.json({name: newGroup.name, members: newGroup.members});
             }
@@ -27,15 +31,25 @@ module.exports = {
 
     addMember: function (req, res, next) {
         var member, newGroup;
-
+        if (!req.body.name) {
+            res.status(400).json({message: 'Please select group from the dropdowan menu!'});
+        }
+        if (!req.body.username) {
+            res.status(400).json({
+                message: 'User with this username is not registred. You can add to the group only registred users.'
+            });
+        }
         User.findOne({
             username: req.body.username
         }, function (err, user) {
             if (err) {
                 console.log('Cannot find testMember :' + err);
+                res.status(404).json({message: 'Error on database'});
+            } else if (!user) {
+                res.status(404).json({message: 'User with this username was not found'});
+            } else {
+                member = user;
             }
-
-            member = user;
         });
 
         Group.findOne({name: req.body.name}).populate('members').exec(function (err, group) {
@@ -46,21 +60,24 @@ module.exports = {
             if (err) {
                 console.log('ERROR ON POPULATING: ' + err);
                 res.sendStatus(400); // TODO: check the real err code
+            } else if (!group) {
+                res.status(404).json(
+                    {message: 'Select group to add member. You can select a group from the dropdown menu "Groups""'});
+            } else {
+                group.members.push(member);
+                group.save();
+                member.groups.push(group);
+                member.save();
+                res.json({name: group.name, members: group.members});
             }
-
-            group.members.push(member);
-            group.save();
-
-            member.groups.push(group);
-            member.save();
-
-            res.json({name: group.name, members: group.members});
-
         });
 
     },
 
     addTask: function (req, res, next) {
+        if (!req.body.name) {
+            res.status(400).json({message: 'Please select group from the dropdown menu to which you want to add the task!'})
+        }
         Group.findOne({name: req.body.name}, function (err, info) {
                 if (err) return res.send("contact create error: " + err);
 
@@ -84,6 +101,9 @@ module.exports = {
     },
 
     getTasks: function (req, res, next) {
+        if (!req.body.name) {
+            res.status(400).json({message: 'Please select group from the dropdown menu !'})
+        }
         Group.findOne({name: req.query.name}, function (err, data) {
             console.log(req.query.name);
             console.log(data);
@@ -132,17 +152,20 @@ module.exports = {
      },*/
 
     listGroups: function (req, res, next) {
-        console.log('---------LIST GROUPS');
-        console.log(req.query.user);
+        if (!req.query || !req.query.user) {
+            res.status(400).json({message: 'Please login'});
+        }
 
         User.findOne({
             'username': req.query.user
         }, function (err, user) {
             if (err) {
-                res.sendStatus(400);
+                res.status(401).json({message: 'Error searching user..'});
+            }
+            if (!user) {
+                res.status(404).json({message: 'User is not registred!'});
             } else if (user) {
                 var groupIDs = user.groups;
-
 
                 Group.find({
                     '_id': {$in: groupIDs}
@@ -150,14 +173,16 @@ module.exports = {
                     if (err) {
                         console.log(err);
                         res.sendStatus(404);
+                    } else {
+                        res.json({info: groups});
                     }
                     console.log(groups);
                     console.log('--------BEFORE RES');
-                    res.json({info: groups});
+
                 });
 
             } else {
-                res.sendStatus(404);
+                res.status(404).json({message: 'Sorry! We have some problems. Please refresh the page and try again!'});
             }
         });
     },
@@ -167,6 +192,12 @@ module.exports = {
 
     addMeeting: function (req, res, next) {
         //req.body
+        if (!req.body.date || !req.body.about) {
+            res.status(400).json({message: 'Please enter date and info about the meeting!'});
+        }
+        if (!req.query.group) {
+            res.status(400).json({message: 'Plaese, select a group from the dropdown menu!'});
+        }
         var newMeeting = {
             date: req.body.date,
             about: req.body.about
@@ -186,14 +217,17 @@ module.exports = {
     },
 
     getMeetings: function (req, res, next) {
+        if (!req.query.name) {
+            res.status(400).json({massage: 'Please, select a group from the dropdown menu!'});
+        }
         Group.findOne({name: req.query.name}, function (err, data) {
-           /* console.log(req.query.name);
-            console.log(data);*/
+            /* console.log(req.query.name);
+             console.log(data);*/
             if (err) {
-                res.sendStatus(400);
+                res.status(400).json({meeting: ''});
             }
-           /* console.log('------------MEETINGS');
-            console.log(data.meetings);*/
+            /* console.log('------------MEETINGS');
+             console.log(data.meetings);*/
 
             res.json({meetings: data.meetings});
         })
