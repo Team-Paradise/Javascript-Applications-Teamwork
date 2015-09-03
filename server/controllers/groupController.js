@@ -13,7 +13,7 @@ module.exports = {
             'name': newGroup.name
         }, function (err, user) {
             if (err) {
-                console.log('Error searching in db: ' + err);
+               // console.log('Error searching in db: ' + err);
                 res.status(404);
             } else if (user) {
                 res.status(422).json({message: 'Group with this name already exist!'});
@@ -47,7 +47,6 @@ module.exports = {
             username: req.body.username
         }, function (err, user) {
             if (err) {
-                console.log('Cannot find testMember :' + err);
                 res.status(404).json({message: 'Error on database'});
                 return next();
             } else if (!user) {
@@ -64,7 +63,7 @@ module.exports = {
             console.log(group);
             console.log('--------------');
             if (err) {
-                console.log('ERROR ON POPULATING: ' + err);
+
                 res.status(400); // TODO: check the real err code
             } else if (!group) {
                 res.status(404)
@@ -97,7 +96,7 @@ module.exports = {
                     {safe: true, upsert: true},
                     function (err, model) {
                         if (err) {
-                            console.log('Error on updating tasks : ' + err);
+
                             res.status(400);
                         }
                         res.json({name: model.name, tasks: model.tasks});
@@ -178,7 +177,6 @@ module.exports = {
         }, function (err, user) {
             if (err) {
                 res.status(401).json({message: 'Error searching user..'});
-                console.log('-------ERROR 170' + err);
                 return next(err);
             }
             if (!user) {
@@ -191,14 +189,11 @@ module.exports = {
                     '_id': {$in: groupIDs}
                 }, function (err, groups) {
                     if (err) {
-                        console.log('------ERROR 182' + err);
+
                         res.status(404);
                     } else {
                         res.json({info: groups});
                     }
-                    console.log(groups);
-                    console.log('--------BEFORE RES');
-
                 });
 
             } else {
@@ -246,13 +241,10 @@ module.exports = {
             res.status(400).json({massage: 'Please, select a group from the dropdown menu!'});
         }
         Group.findOne({name: req.query.name}, function (err, data) {
-            /* console.log(req.query.name);
-             console.log(data);*/
+
             if (err) {
                 res.status(400).json({meeting: ''});
             }
-            /* console.log('------------MEETINGS');
-             console.log(data.meetings);*/
 
             res.json({meetings: data.meetings});
         })
