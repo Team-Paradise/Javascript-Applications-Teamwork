@@ -1,9 +1,9 @@
 import {joinRoom} from './../controllers/chatDataManager.js';
 
-export default function addMember() {
+export default function addMember(member) {
     console.log('------------IN ADD MEMBER');
    // var member = $('#input-add-member').val();
-var member = 'solara';
+
     var queryAddMember = {
         name: JSON.parse(localStorage.getItem('current-group')),
         username: member

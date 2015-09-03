@@ -42,13 +42,11 @@ export default function signupGroupController() {
             if (err) {
                 console.log(err);
             }
-
-            addGroupMember();
+            var creator = JSON.parse(localStorage.getItem('user'));
+            addGroupMember(creator);
             // TODO: when redirect should do it after addGroupMember -> move it in promise
             //location.hash = "#group-nav";
         });
-
-
 
 
     });
