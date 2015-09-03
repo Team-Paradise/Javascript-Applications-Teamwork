@@ -101,18 +101,21 @@ module.exports = {
     },
 
     getTasks: function (req, res, next) {
-        if (!req.body.name) {
-            res.status(400).json({message: 'Please select group from the dropdown menu !'})
+        if (!req || !req.body || !req.body.name) {
+            res.status(400);//.json({message: 'Please select group from the dropdown menu !'})
         }
         Group.findOne({name: req.query.name}, function (err, data) {
-            console.log(req.query.name);
-            console.log(data);
+
             if (err) {
-                res.sendStatus(400);
+                res.status(400);
             }
-            console.log(data);
-            console.log('null??');
-            res.json({tasks: data.tasks});
+            if (!data) {
+                res.status(404);//.json('Please, select group!');
+            } else {
+
+                res.json({tasks: data.tasks});
+            }
+
         })
     },
 
@@ -152,9 +155,11 @@ module.exports = {
      },*/
 
     listGroups: function (req, res, next) {
+        console.log(req.query);
         if (!req.query || !req.query.user) {
             res.status(400).json({message: 'Please login'});
         }
+
 
         User.findOne({
             'username': req.query.user

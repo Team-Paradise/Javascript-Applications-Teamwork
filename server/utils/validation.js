@@ -1,6 +1,6 @@
 Users = require('mongoose').model('User');
 
-function auth(req, res, next) {
+/*function auth(req, res, next) {
     var authKey = req.headers['x-authkey'];
     if (!authKey) {
         req.user = null;
@@ -19,7 +19,7 @@ function auth(req, res, next) {
             res.status(404)
                 .json(err);
         });
-}
+}*/
 
 module.exports = function(app) {
    // console.log('------------AUTH');
