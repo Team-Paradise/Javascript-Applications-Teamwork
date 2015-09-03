@@ -27,5 +27,7 @@ localStorage.setItem('current-group',JSON.stringify(newGroup.name));
                 console.log(data);
             }
         });
+
+        location.hash = "#group-nav";
     });
 };

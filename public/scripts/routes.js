@@ -8,11 +8,12 @@ import todoController from './controllers/todoController.js';
 import calendarController from './controllers/calendarController.js';
 import groupNavController from './controllers/groupNavController.js';
 import chatController from './controllers/chatController.js';
+import membersController from './controllers/membersController.js';
 import toastr from 'lib/toastr/toastr.js';
 
 import handlebars from 'lib/handlebars/handlebars.js';
 
-import testController from './controllers/testController.js';
+
 
 export default function switchControllers(partial) {
     var $mainContainer = $('#main-container'),
@@ -58,10 +59,11 @@ export default function switchControllers(partial) {
                         container: $groupContainer, contentDataRoute: '', controller: calendarController
                     };
                     break;
-                //DEBUG:
-                case 'test':
-                    data = {container: $mainContainer, contentDataRoute: '', controller: testController};
+                case 'add-member':
+                    data = {container: $groupContainer, contentDataRoute: '', controller: membersController};
                     break;
+                //DEBUG:
+
                 default:
                     data = {container: $mainContainer, contentDataRoute: '', controller: homeController};
                     break;
@@ -87,9 +89,7 @@ export default function switchControllers(partial) {
                         data: query,
                         success: function (data) {
                             console.log('SUCCESS!!!!');
-                            console.log(route);
-                            console.log(data);
-                            console.log(data);
+
 
                             resolve({action: action, info: data});
                         },
@@ -131,18 +131,13 @@ export default function switchControllers(partial) {
 
         getActionOnHashChange(partial)
             .then(function (data) {
-                console.log('FIRST');
-                console.log(data);
 
                 getContext(data)
                     .then(function (data2) {
-                        console.log('SECOND');
-                        console.log(data2.info);
 
                         test(data2.action, data2.info, url)
                             .then(function (data3) {
-                                console.log('THIRD!!!');
-                                console.log(data3);
+
                                 data3.controller();
                             })
                     })

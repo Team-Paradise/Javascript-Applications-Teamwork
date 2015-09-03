@@ -2,21 +2,17 @@ body{
     margin-top: 100px;
 }
 
-.navbar-right .navbar-form input, .navbar-right .navbar-form button {
-  margin-right: 10px;
-}
-
 button a {
     color: white;
 }
+
 button a:hover{
     color: white;
     text-decoration: none;
 }
 
-#group-nav{
-    width: 800px;
-    margin-left: 50px;
+.navbar-right .navbar-form input, .navbar-right .navbar-form button {
+  margin-right: 10px;
 }
 
 .jumbotron {
@@ -40,3 +36,44 @@ footer {
     border-top: 1px solid #CCC;
     padding-top: 10px;
 }
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+}
+
+.btn-circle.btn-xl {
+    width: 130px;
+    height: 130px;
+    padding: 10px 16px;
+    font-size: 24px;
+    line-height: 1.33;
+    border-radius: 100px;
+}
+
+.btn-circle a{
+   display: block;
+    line-height: 100px;
+    height: 100%;
+}
+
+#jumbotron-signup-group-button{
+   display: none;
+}
+
+#group-nav{
+    width: 1000px;
+    margin-left: 50px;
+}
+
+#group-container{
+    width: 670px;
+    height: 440px;
+    margin-left: 310px;
+}
+

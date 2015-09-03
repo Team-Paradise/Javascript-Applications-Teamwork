@@ -5,10 +5,10 @@ import switchControllers from './routes.js';
 
 export function init() {
     var $loginBar = $('#loginBar');
-		
-		document.location.hash = "#/";
-		document.location.hash = "#home";
-		
+
+    document.location.hash = "#/";
+     document.location.hash = "#home";
+
     /* Some usefull options for toastr:
      toastr.options = {
      "closeButton": false,
@@ -27,28 +27,40 @@ export function init() {
      "showMethod": "fadeIn",
      "hideMethod": "fadeOut"
      };*/
-	 
-	$loginBar.load('partials/loginBar.html', function () {
-		if(!localStorage.getItem('isUserLogged')) {
-				loginUser();
-				
-				 /* $('#sign-up-button').on('click', function () {
-				 $mainContainer.load('partials/sign-up-form.html');
-				 });*/
-		} else {
-			console.log('my username is taken from storage');
-			var currentUsername = JSON.parse(localStorage.getItem('user'));
+
+
+    console.log('-----------HASH');
+    var hash = JSON.parse(localStorage.getItem('route'));
+   /* var path = hash.replace("#", "");
+    switchControllers(path);*/
+
+
+    $loginBar.load('partials/loginBar.html', function () {
+        if (!localStorage.getItem('isUserLogged')) {
+            loginUser();
+
+            /* $('#sign-up-button').on('click', function () {
+             $mainContainer.load('partials/sign-up-form.html');
+             });*/
+        } else {
+            console.log('my username is taken from storage');
+            var currentUsername = JSON.parse(localStorage.getItem('user'));
             toggleLoginPartials(currentUsername);
-		}
-        
+        }
+
         logoutUser();
-	});
-    
-    
-    
-	$(window).on('hashchange', function (e) {
+    });
+
+    $(window).bind('beforeunload', function () {
+        var hash = JSON.stringify(location.hash);
+        localStorage.setItem('route', hash);
+
+
+    });
+
+    $(window).on('hashchange', function (e) {
         console.log('hash change in window');
         var path = location.hash.replace("#", "");
-		switchControllers(path);
+        switchControllers(path);
     });
 };

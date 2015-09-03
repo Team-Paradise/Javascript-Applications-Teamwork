@@ -4,7 +4,7 @@ export default function todoController() {
     // TODO: think where to store wich is the current user + open group
 
 
-    var currentGroupNameTest = "Paradise";
+    var currentGroupNameTest = JSON.parse(localStorage.getItem('current-group'));
     console.log('todo page loaded');
   /*  $("#sortable").sortable();
     $("#sortable").disableSelection();*/

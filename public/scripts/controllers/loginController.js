@@ -1,6 +1,7 @@
 import 'lib/jquery/dist/jquery.js';
 import 'lib/bootstrap/js/dropdown.js';
 import toastr from 'lib/toastr/toastr.js';
+import homeController from './../controllers/homeController.js';
 
 function loginUser() {
 	var currentUser = {
@@ -22,9 +23,10 @@ function loginUser() {
             success: function (data) {
                 console.log(data);
                 toggleLoginPartials(data.username);
-                
                 localStorage.setItem('isUserLogged', true);
                 localStorage.setItem('user', JSON.stringify(data.username));
+                //TODO: can be done with method redirect..
+                homeController();
             },
             error: function (data) {
 
@@ -41,6 +43,7 @@ function logoutUser() {
     $('#logout-button').on('click', function () {
         toggleLoginPartials();
         localStorage.clear();
+        homeController();
     });
 }
 
