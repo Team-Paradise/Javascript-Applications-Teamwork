@@ -95,9 +95,13 @@ export default function switchControllers(partial) {
                             resolve({action: action, info: data});
                         },
                         error: function (err) {
-                            var message = err.message || 'Something happend..';
-                            toastr.error('Error: ' + message);
-                            reject(err);
+
+                            var message = JSON.parse(err.responseText).message || 'Something happend..';
+                            // toastr.error('Error: ' + message);
+
+                            reject({
+                                message: message
+                            });
                         }
                     })
                 }
@@ -134,17 +138,20 @@ export default function switchControllers(partial) {
             .then(function (data) {
 
                 getContext(data)
-                    .then(function (data2, err) {
-                        if (err) {
-                            var message = err.message || 'Something happend.. line 139';
-                            toastr.error(message);
-                            return;
-                        }
+                    .then(function (data2) {
                         test(data2.action, data2.info, url)
                             .then(function (data3) {
 
                                 data3.controller();
                             })
+                    }, function (err) {
+                        if (err) {
+                            console.log(err);
+                            var message = err.message || 'Something happend.. line 139';
+                            toastr.error(message);
+                            return;
+                        }
+
                     })
             })
 

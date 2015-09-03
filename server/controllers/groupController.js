@@ -6,6 +6,7 @@ module.exports = {
         var newGroup = req.body;
         if (!newGroup.name) {
             res.status(400).json({message: 'Please enter username!'});
+            return next();
         }
         // console.log(newGroup);
         Group.findOne({
@@ -13,9 +14,10 @@ module.exports = {
         }, function (err, user) {
             if (err) {
                 console.log('Error searching in db: ' + err);
-                res.sendStatus(404);
+                res.status(404);
             } else if (user) {
                 res.status(422).json({message: 'Group with this name already exist!'});
+                return next();
             }
             else {
                 Group.create({
@@ -33,11 +35,13 @@ module.exports = {
         var member, newGroup;
         if (!req.body.name) {
             res.status(400).json({message: 'Please select group from the dropdowan menu!'});
+            return next();
         }
         if (!req.body.username) {
             res.status(400).json({
                 message: 'User with this username is not registred. You can add to the group only registred users.'
             });
+            return next();
         }
         User.findOne({
             username: req.body.username
@@ -45,13 +49,15 @@ module.exports = {
             if (err) {
                 console.log('Cannot find testMember :' + err);
                 res.status(404).json({message: 'Error on database'});
+                return next();
             } else if (!user) {
                 res.status(404).json({message: 'User with this username was not found'});
+                return next();
             } else {
                 member = user;
             }
         });
-
+// tODO: exec?
         Group.findOne({name: req.body.name}).populate('members').exec(function (err, group) {
             console.log('-----------ADD MEMBER:');
             console.log(member);
@@ -59,11 +65,12 @@ module.exports = {
             console.log('--------------');
             if (err) {
                 console.log('ERROR ON POPULATING: ' + err);
-                res.sendStatus(400); // TODO: check the real err code
+                res.status(400); // TODO: check the real err code
             } else if (!group) {
-                res.status(404).json(
-                    {message: 'Select group to add member. You can select a group from the dropdown menu "Groups""'});
-            } else {
+                res.status(404)
+                    .json({message: 'Select group to add member. You can select a group from the dropdown menu "Groups""'});
+                return next();
+            } else if (member && ( member.groups || Array.isArray(member.groups))) {
                 group.members.push(member);
                 group.save();
                 member.groups.push(group);
@@ -76,7 +83,9 @@ module.exports = {
 
     addTask: function (req, res, next) {
         if (!req.body.name) {
-            res.status(400).json({message: 'Please select group from the dropdown menu to which you want to add the task!'})
+            res.status(400)
+                .json({message: 'Please select group from the dropdown menu to which you want to add the task!'})
+            return next();
         }
         Group.findOne({name: req.body.name}, function (err, info) {
                 if (err) return res.send("contact create error: " + err);
@@ -89,9 +98,9 @@ module.exports = {
                     function (err, model) {
                         if (err) {
                             console.log('Error on updating tasks : ' + err);
-                            res.sendStatus(400);
+                            res.status(400);
                         }
-                        res.json({name: model.name, tasks: model.tasks})
+                        res.json({name: model.name, tasks: model.tasks});
                         console.log(model);
                     }
                 );
@@ -101,15 +110,17 @@ module.exports = {
     },
 
     getTasks: function (req, res, next) {
-        if (!req || !req.body || !req.body.name) {
-            res.status(400);//.json({message: 'Please select group from the dropdown menu !'})
+        if (!req || !req.query || !req.query.name) {
+            res.status(400)
+                .json({message: 'Please select group from the dropdown menu !'});
+            return next();
         }
         Group.findOne({name: req.query.name}, function (err, data) {
 
             if (err) {
                 res.status(400);
             }
-            if (!data) {
+            if (!data && !Array.isArray(data)) {
                 res.status(404);//.json('Please, select group!');
             } else {
 
@@ -158,6 +169,7 @@ module.exports = {
         console.log(req.query);
         if (!req.query || !req.query.user) {
             res.status(400).json({message: 'Please login'});
+            return next();
         }
 
 
@@ -166,9 +178,12 @@ module.exports = {
         }, function (err, user) {
             if (err) {
                 res.status(401).json({message: 'Error searching user..'});
+                console.log('-------ERROR 170' + err);
+                return next(err);
             }
             if (!user) {
                 res.status(404).json({message: 'User is not registred!'});
+                return next();
             } else if (user) {
                 var groupIDs = user.groups;
 
@@ -176,8 +191,8 @@ module.exports = {
                     '_id': {$in: groupIDs}
                 }, function (err, groups) {
                     if (err) {
-                        console.log(err);
-                        res.sendStatus(404);
+                        console.log('------ERROR 182' + err);
+                        res.status(404);
                     } else {
                         res.json({info: groups});
                     }
@@ -187,7 +202,9 @@ module.exports = {
                 });
 
             } else {
-                res.status(404).json({message: 'Sorry! We have some problems. Please refresh the page and try again!'});
+                res.status(404)
+                    .json({message: 'Sorry! We have some problems. Please refresh the page and try again!'});
+                return next();
             }
         });
     },
@@ -198,10 +215,14 @@ module.exports = {
     addMeeting: function (req, res, next) {
         //req.body
         if (!req.body.date || !req.body.about) {
-            res.status(400).json({message: 'Please enter date and info about the meeting!'});
+            res.status(400)
+                .json({message: 'Please enter date and info about the meeting!'});
+            return next();
         }
-        if (!req.query.group) {
-            res.status(400).json({message: 'Plaese, select a group from the dropdown menu!'});
+        if (!req.body.group) {
+            res.status(400)
+                .json({message: 'Plaese, select a group from the dropdown menu!'});
+            return next();
         }
         var newMeeting = {
             date: req.body.date,
@@ -210,8 +231,7 @@ module.exports = {
 
         Group.findOne({name: req.body.group}).populate('meetings').exec(function (err, group) {
             if (err) {
-
-                res.sendStatus(404);
+                res.status(404);
             }
             group.meetings.push(newMeeting);
             group.save();

@@ -1,4 +1,5 @@
 import {joinRoom} from './../controllers/chatDataManager.js';
+import toastr from './../../lib/toastr/toastr.js';
 
 export default function addMember(member) {
     console.log('------------IN ADD MEMBER');
@@ -23,8 +24,9 @@ export default function addMember(member) {
             joinRoom(member, data.name);
             console.log(data);
         },
-        error: function (data) {
-            console.log(data);
+        error: function (err) {
+            var message = JSON.parse(err.responseText).message || 'Something happend..';
+            toastr.error(message);
         }
     });
 
@@ -37,9 +39,9 @@ export default function addMember(member) {
             console.log('GRPOUP ADDED');
             console.log(data);
         },
-        error: function (data) {
-            console.log('Error on adding the user as group member');
-            console.log(data);
+        error: function (err) {
+            var message = JSON.parse(err.responseText).message || 'Something happend..';
+            toastr.error(message);
         }
     });
 }//end add member
