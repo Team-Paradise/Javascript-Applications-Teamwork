@@ -9,7 +9,7 @@ export default function meetingsController() {
         });
         
         // create DateTimePicker from input HTML element
-        var datetimepicker = $("#datetimepicker").data("kendoDateTimePicker");
+        var datetimepicker = $("#datetimepicker").attr({disabled: 'true', placeholder: 'Choose date and time'}).data("kendoDateTimePicker");
         var meetingInformation = {};
         
         datetimepicker.bind("change", function() {
