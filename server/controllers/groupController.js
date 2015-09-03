@@ -186,8 +186,19 @@ module.exports = {
     },
 
     getMeetings: function (req, res, next) {
+        Group.findOne({name: req.query.name}, function (err, data) {
+           /* console.log(req.query.name);
+            console.log(data);*/
+            if (err) {
+                res.sendStatus(400);
+            }
+           /* console.log('------------MEETINGS');
+            console.log(data.meetings);*/
 
+            res.json({meetings: data.meetings});
+        })
     },
+
     getCalendar: function (req, res, next) {
 
     },
