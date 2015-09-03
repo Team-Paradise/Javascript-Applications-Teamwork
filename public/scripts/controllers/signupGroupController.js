@@ -1,4 +1,28 @@
 import {addRoom} from './../controllers/chatDataManager.js';
+import addGroupMember from './../models/Group.js';
+
+function signUp(data) {
+    var promise = new Promise(function (resolve, reject) {
+        $.ajax({
+            method: "POST",
+            url: '/groups/signup',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (data) {
+                addRoom(data.name);
+                console.log(data);
+                resolve(data);
+            },
+            error: function (data) {
+                reject(data);
+                console.log(data);
+            }
+        });
+    });
+
+
+    return promise;
+}
 export default function signupGroupController() {
 
     var $groupContainer = $('#group-container');
@@ -13,21 +37,19 @@ export default function signupGroupController() {
             description: $('#input-group-desc').val(),
             git: $('#input-git-link').val()
         };
-localStorage.setItem('current-group',JSON.stringify(newGroup.name));
-        $.ajax({
-            method: "POST",
-            url: '/groups/signup',
-            contentType: 'application/json',
-            data: JSON.stringify(newGroup),
-            success: function (data) {
-                addRoom(data.name);
-                console.log(data);
-            },
-            error: function (data) {
-                console.log(data);
+        localStorage.setItem('current-group', JSON.stringify(newGroup.name));
+        signUp(newGroup).then(function (data, err) {
+            if (err) {
+                console.log(err);
             }
+
+            addGroupMember();
+            // TODO: when redirect should do it after addGroupMember -> move it in promise
+            //location.hash = "#group-nav";
         });
 
-        location.hash = "#group-nav";
+
+
+
     });
 };

@@ -26,7 +26,7 @@ function loginUser() {
                 localStorage.setItem('isUserLogged', true);
                 localStorage.setItem('user', JSON.stringify(data.username));
                 //TODO: can be done with method redirect..
-                homeController();
+                homeController();  // move to promise
             },
             error: function (data) {
 

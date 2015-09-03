@@ -1,4 +1,5 @@
 import {joinRoom} from './../controllers/chatDataManager.js';
+import addGroupMember from './../models/Group.js';
 
 function addMember() {
     var member = $('#input-add-member').val();
@@ -71,5 +72,5 @@ export default function membersController() {
     });
     // ADD MEMBER TO PREV REGISTRED GROUP
     var btnAdd = $('#add-member-btn');
-    btnAdd.on('click', addMember);
+    btnAdd.on('click', addGroupMember);
 }
