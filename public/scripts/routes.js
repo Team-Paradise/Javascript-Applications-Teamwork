@@ -1,4 +1,5 @@
 import 'lib/jquery/dist/jquery.js';
+import handlebars from 'lib/handlebars/handlebars.js';
 import homeController from './controllers/homeController.js';
 import feedController from './controllers/feedController.js';
 import meetingsController from './controllers/meetingsController.js';
@@ -10,6 +11,7 @@ import groupNavController from './controllers/groupNavController.js';
 import chatController from './controllers/chatController.js';
 import membersController from './controllers/membersController.js';
 import toastr from 'lib/toastr/toastr.js';
+
 
 import handlebars from 'lib/handlebars/handlebars.js';
 

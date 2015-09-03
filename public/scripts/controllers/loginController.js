@@ -25,8 +25,12 @@ function loginUser() {
                 toggleLoginPartials(data.username);
                 localStorage.setItem('isUserLogged', true);
                 localStorage.setItem('user', JSON.stringify(data.username));
+
                 //TODO: can be done with method redirect..
                 homeController();  // move to promise
+
+                localStorage.setItem('authKey', JSON.stringify(data.authKey));
+
             },
             error: function (data) {
 
