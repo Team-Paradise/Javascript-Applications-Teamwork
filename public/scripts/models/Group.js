@@ -18,6 +18,9 @@ export default function addMember(member) {
         url: '/groups/add/member',
         contentType: 'application/json',
         data: JSON.stringify(queryAddMember),
+        headers: {
+            'x-authkey': JSON.parse(localStorage.getItem('access-token'))
+        },
         success: function (data) {
             console.log('MEMBER ADDED');
             // TODO: switch member with data.??
@@ -35,6 +38,9 @@ export default function addMember(member) {
         url: '/users/add/group',
         contentType: 'application/json',
         data: JSON.stringify(queryAddGroup),
+        headers: {
+            'x-authkey': JSON.parse(localStorage.getItem('access-token'))
+        },
         success: function (data) {
             console.log('GRPOUP ADDED');
             console.log(data);

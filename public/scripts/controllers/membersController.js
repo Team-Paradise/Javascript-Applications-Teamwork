@@ -23,6 +23,9 @@ export default function membersController() {
             url: '/groups/signup',
             contentType: 'application/json',
             data: JSON.stringify(newGroup),
+            headers: {
+                'x-authkey': JSON.parse(localStorage.getItem('access-token'))
+            },
             success: function (data) {
                 console.log(data);
             },

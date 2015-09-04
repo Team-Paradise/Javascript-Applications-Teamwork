@@ -15,6 +15,7 @@ module.exports = {
             if (err) {
                // console.log('Error searching in db: ' + err);
                 res.status(404);
+                return next();
             } else if (user) {
                 res.status(422).json({message: 'Group with this name already exist!'});
                 return next();
@@ -118,9 +119,11 @@ module.exports = {
 
             if (err) {
                 res.status(400);
+                next();
             }
             if (!data && !Array.isArray(data)) {
                 res.status(404);//.json('Please, select group!');
+                next();
             } else {
 
                 res.json({tasks: data.tasks});

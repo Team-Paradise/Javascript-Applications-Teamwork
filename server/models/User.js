@@ -9,6 +9,7 @@ var userSchema = new Schema({
     firstName: {type: String},
     lastName: {type: String},
     password: {type: String},
+    authKey: {type: String},
     email: {type: String},
     aboutMe: {type: String},
     groups: [{type: ObjectId, ref: 'Group'}]
@@ -17,16 +18,6 @@ var userSchema = new Schema({
 
 var User = mongoose.model('User', userSchema, 'users');
 
-/*userSchema.method({
- authenticate: function (password) {
- if (validation.validateUser(this.username, password) === this.password) {
- return true;
- }
- else {
- return false;
- }
- }
- });*/
 
 module.exports.createInitialUsers = function () {
     console.log('hey');
@@ -36,55 +27,22 @@ module.exports.createInitialUsers = function () {
             console.log("Error! No such table in db! : " + err);
             return;
         }
-        console.log("Creating users..");
+        console.log("Loading..please wait for next message..");
 
         if (users.length === 0 || users.length < 5) {
             User.create({
-                username: 'solara54',
+                username: 'Database loaded..No users for testing',
                 firstName: 'Mariya',
                 lastName: 'Steffanova',
                 password: '12345',
                 email: 'solara@gmail.com'
 
-            })
-                .then(function (user) {
-
-                    console.log(user.username);
-
-                });
-            User.create({
-                username: 'baretata',
-                firstName: 'Zlatko',
-                lastName: 'Zlatko',
-                password: '12345',
-                email: 'baretata@gmail.com'
             }).then(function (user) {
 
                 console.log(user.username);
 
             });
-            User.create({
-                username: 'kiko',
-                firstName: 'Kiko',
-                lastName: 'Kiko',
-                password: '12345',
-                email: 'kiko@gmail.com'
-            }).then(function (user) {
 
-                console.log(user.username);
-
-            });
-            User.create({
-                username: 'krasi',
-                firstName: 'Krasi',
-                lastName: 'Stoyanov',
-                password: '12345',
-                email: 'krasi@gmail.com'
-            }).then(function (user) {
-
-                console.log(user.username);
-
-            });
         }
     });
 };

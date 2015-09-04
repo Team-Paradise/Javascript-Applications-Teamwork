@@ -88,6 +88,9 @@ export default function switchControllers(partial) {
                         url: route,
                         contentType: 'application/json',
                         data: query,
+                        headers: {
+                            'x-authkey': JSON.parse(localStorage.getItem('access-token'))
+                        },
                         success: function (data) {
                             console.log('SUCCESS!!!!');
 

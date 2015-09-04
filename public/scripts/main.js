@@ -36,7 +36,7 @@ export function init() {
 
 
     $loginBar.load('partials/loginBar.html', function () {
-        if (!localStorage.getItem('isUserLogged')) {
+        if (!localStorage.getItem('is-logged')) {
             loginUser();
 
             /* $('#sign-up-button').on('click', function () {

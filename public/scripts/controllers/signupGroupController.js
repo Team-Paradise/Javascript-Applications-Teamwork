@@ -8,6 +8,9 @@ function signUp(data) {
             url: '/groups/signup',
             contentType: 'application/json',
             data: JSON.stringify(data),
+            headers: {
+                'x-authkey': JSON.parse(localStorage.getItem('access-token'))
+            },
             success: function (data) {
                 addRoom(data.name);
                 console.log(data);

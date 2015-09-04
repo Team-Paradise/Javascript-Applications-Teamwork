@@ -80,7 +80,7 @@ export default function signupController() {
                 success: function (data) {
 
                     localStorage.setItem('user', JSON.stringify(data.username));
-                    localStorage.setItem('authKey', JSON.stringify(data.authKey));
+                    localStorage.setItem('access-token', JSON.stringify(data.authKey));
 
                     // TODO: Login the user automatic
                     toggleLoginPartials(data.username);

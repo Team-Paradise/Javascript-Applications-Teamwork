@@ -16,14 +16,17 @@ module.exports = {
         }, function (err, user) {
             if (err) {
                 console.log('Error searching in db: ' + err);
-                res.sendStatus(404);
+                res.status(404);
+                next();
             } else if (user) {
                 if (req.query.password === user.password) {
                     res.json(user); // move out in promise
+                    next();
                 }
             }
             else {
-                res.sendStatus(404);
+                res.status(404);
+                next();
             }
         });
 
@@ -37,19 +40,28 @@ module.exports = {
         }, function (err, user) {
             if (err) {
                 console.log('Error searching in db: ' + err);
-                res.sendStatus(404);
+                res.status(404);
+                next();
             } else if (user) {
-                res.sendStatus(422);
+                res.status(422);
+                next();
 
             }
             else {
                 var newUser = req.body;
                 newUser.authKey = generateAuthKey(newUser.username);
                 newUser.groups = [];
-                User.create(newUser);
+                var userToSave = new User(newUser);
+                userToSave.save(function (err) {
+                    if (err) {
+                        console.log(err);
+                    }
+                    console.log(this);
+                });
                 console.log('----------SIGN UP');
-                console.log(newUser);
+                console.log(userToSave);
                 res.json({username: newUser.username, authKey: newUser.authKey});
+                next();
             }
         });
     }

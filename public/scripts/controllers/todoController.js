@@ -98,6 +98,9 @@ export default function todoController() {
             url:'groups/add/task',
             contentType: 'application/json',
             data: JSON.stringify({name: groupName, task: todo}),
+            headers: {
+                'x-authkey': JSON.parse(localStorage.getItem('access-token'))
+            },
             success: function(data)
             {
                 console.log(data)
