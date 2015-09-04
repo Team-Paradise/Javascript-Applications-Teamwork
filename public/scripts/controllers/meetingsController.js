@@ -28,6 +28,9 @@ export default function meetingsController() {
                 method: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(meetingInformation),
+                headers: {
+                    'x-authkey': JSON.parse(localStorage.getItem('access-token'))
+                },
                 success: function (data) {
                     toastr.options = {"positionClass": "toast-top-center"};
                     toastr.success('You successfully arranged meeting on ' + data.meeting.date);
