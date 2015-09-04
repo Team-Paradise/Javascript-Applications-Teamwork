@@ -8,6 +8,7 @@ var userSchema = new Schema({
     username: {type: String},
     firstName: {type: String},
     lastName: {type: String},
+    passHash: {type: String},
     password: {type: String},
     authKey: {type: String},
     email: {type: String},

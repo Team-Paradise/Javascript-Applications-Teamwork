@@ -67,10 +67,11 @@ export default function signupController() {
                 username: $username.val(),
                 firstName: $firstName.val(),
                 lastName: $lastName.val(),
-                password: $password.val(),
+                passHash: CryptoJS.SHA1($password.val()).toString(),
                 email: $email.val(),
                 aboutMe: $aboutme.val()
             };
+
             console.log(newUser);
             $.ajax({
                 method: 'POST',
@@ -109,7 +110,7 @@ export default function signupController() {
             });
         }
         else {
-            console.log('invalid user data')
+            console.log('invalid user data');
             // TODO tooltip
             return false;
         }

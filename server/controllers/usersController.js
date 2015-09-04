@@ -12,14 +12,14 @@ module.exports = {
         // TODO: dont send the pass to the client, hash the pass before sending to db (crypto)
         User.findOne({
             'username': req.query.username,
-            'password': req.query.password
+            'passHash': req.query.passHash
         }, function (err, user) {
             if (err) {
                 console.log('Error searching in db: ' + err);
                 res.status(404);
                 next();
             } else if (user) {
-                if (req.query.password === user.password) {
+                if (req.query.passHash === user.passHash) {
                     res.json(user); // move out in promise
                     next();
                 }

@@ -6,12 +6,12 @@ import homeController from './../controllers/homeController.js';
 function loginUser() {
 	var currentUser = {
         username: '',
-        password: ''
+        passHash : ''
     };
     
     $('#loginSubmit').on('click', function () {
         currentUser.username = $('#username').val();
-        currentUser.password = $('#pass').val();
+        currentUser.passHash=  CryptoJS.SHA1( $('#pass').val()).toString();
 
         // DONE: post data for the user on server, check in db for the user
         // TODO: set promises
