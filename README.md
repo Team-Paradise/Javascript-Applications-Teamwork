@@ -55,4 +55,5 @@ An application that supports development process by providing various tools to a
 * bootstrap
 * handlebars
 * toastr
+* KendoIU
 * etc.
