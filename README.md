@@ -1,96 +1,74 @@
-#JavaScript Applications: Teamwork Assignment
-*****************************************
+# Telerik JavaScript Applications - TeamWork
+---
 
-This document describes the teamwork assignment for Telerik Academy students in "JavaScript Applications" course
+# _Team Paradise_
 
-#Project Description
 
-Design and implement an **object-oriented web application** by choice.
 
-It could be a simple game , component library , business application or any other
-*   You are absolutely free to choose the topic of your work
-*   Sample applications:
-    *   Snake
-    *   Chess
-    *   Backgammon
-    *   Minesweeper
-    *   Tetris
-    *   Xonix
-    *   Supermario
-    *   Components library(windows, buttons, text boxes, menus, etc.)
-    *   Book store
-    *   Auction
-    *   Movie rental
-    *   Bug tracker
-    *   Knowledge management system
-    *   E-library
-    *   Text editor
+####  Members:
 
-##General Requirements
-Please define and implement the following assets in your project:
-*   Use [jQuery](https://jquery.com/)
-*   Implement OOP design
-    *   Application logic using objects, modules and data hiding
-        *   Both Prototypal and classical inheritances are Ok
-    *   At least 3 modules
-    *   At least 7 types of objects
-*   Unit tests
-    *   Using [Mocha](http://mochajs.org/), [Chai](http://chaijs.com/) and [SinonJS](http://sinonjs.org/)
-*   Implement a UI for your application 
-    *   Use KendoUI, jQueryUI or implement your own UI logic
-*   Use some kind of web data storage, one of the following is Ok
-    *   Your backend with Node.js, PHP, ASP.NET, Django, Ruby on Rails, Spring, etc...
-    *   Telerik Backend Services
-    *   Parse
-    *   Microsoft Mobile App Services
-*   Use some kind of local storage, one of the following is Ok:
-    *   `localStorage`
-    *   `sessionStorage`
-*   Use [Twitter Bootstrap](http://getbootstrap.com/)
-    *   Research and use Bootstrap for your application
-    *   Make the application responsive for different screens and resolutions
-*   At least one third-party API to share something from your application
-    *   Samples:
-        *   Share status to Facebook, Google+, Twitter, etc...
-        *   Upload images to Facebook, Flickr, Instagram             
-*   **The application must work in the latest versions of the browsers: Google Chrome, Mozilla Firefox, Internet Explorer 10/11, Opera and Apple Safari**
+| Име      | Academy nickname       | Github  |
+| ------------- |:-------------:| -----:|
+| Златко Атанасов  | baretata | baretata |
+| Мария Стефанова    | MariyaSteffanova      |   MariyaSteffanova |
+| Кирил Колев | kiko81     |    kiko81 |
+| Красимир Стоянов | KrasiKoziroga      |    KrasiStoyanov |
+| Стоян Добрев | SDobrev       |    SDobrev |
 
-##Additional Requirements
-Follow the best practices for producing high-quality code: 
-*   **Correct naming**
-*   **Data encapsulation**
-    *   Use OOP and modules
-*   **Strong cohesion** and **loose coupling**
-*   Use **GIT** as a source control system
-*   Host it on [http://github.com](http://github.com)
+## Paradise platform application
 
-##Optional Requirements    
-If you have a chance, time and a suitable situation, you might add some of the following to your project:
-*   Backward compatibility (make the application usable on browsers like IE8, IE7 and IE6)
-*   Integration tests
-*   Usage of a structural JavaScript framework:
-    *   AngularJS, KendoUI, Knockout.js, Backbone.js, etc...
+#### _The application that provides for you and your group the tools you need to build your projects easier and faster than ever._
 
-##Non-required Work
-*   Completely finished project is not obligatory required. It will not be a big problem if your project is not completely finished or is not working greatly
-    *   This team work project is for educational purpose
-    *   Its main purpose it to experience using graphics, DOM manipulation and OOP in a real-world-like project and to get some experience in team working and team collaboration with a source control system.
-*   Implementation of server-side logic with ASP.NET, PHP, Java or Node.js
+[Guthub](https://github.com/Team-Paradise/Javascript-Applications-Teamwork) repository - 
+this [Link](http://paradise-platform.herokuapp.com) to try
 
-##Deliverables
+![alt text](https://github.com/Team-Paradise/Javascript-Applications-Teamwork/blob/master/screenshots/overall_view.jpg "overall view")
 
-*   Register your application at [Telerik Academy Showcase System](http://best.telerikacademy.com)
-    *   Provide a link for the github repository of your application
-    *   Host your application on a server, and provide a link
-        *   You can host your application on http://appharbor.com, http://heroku.com or just use the http://rawgit.com
 
-##Public Project Defense
-Each team will have to deliver a public defense of its work to the other students and trainers. You will have only 10 minutes for the following:
-*   Demonstrate the application (very shortly)
-*   Show the source code
-*   Show the commits logs to confirm that team member have contributed.
-*   Optionally you might prepare a presentation (3-4 slides)
-Please be **strict in timing!** Be well prepared for presenting maximum of your work for minimum time. Bring your own laptop. Test it preliminary with the multimedia projector. Open the project assets beforehand to save time. You have 10 minutes, no more
+---
+An application that supports development process by providing various tools to aid teamwork all in one place. It contains the following modules...
+* user registration 
 
-##Give Feedback about Your Teammates
-You will be invited to provide feedback about all your teammates, their attitude to this project, their technical skills, their team working skills, their contribution to the project, etc. The feedback is important part of the project evaluation so take it seriously and be honest
+![alt text](https://github.com/Team-Paradise/Javascript-Applications-Teamwork/blob/master/screenshots/userReg.jpg "user registration")
+
+* group registration
+
+* group management
+
+![alt text](https://github.com/Team-Paradise/Javascript-Applications-Teamwork/blob/master/screenshots/groupManagement.jpg "group management")
+
+* meetings arrangement
+
+![alt text](https://github.com/Team-Paradise/Javascript-Applications-Teamwork/blob/master/screenshots/meetings.jpg "meetings")
+
+* chat 
+
+![alt text](https://github.com/Team-Paradise/Javascript-Applications-Teamwork/blob/master/screenshots/chat.jpg "chat")
+* TODO list
+
+ ![alt text](https://github.com/Team-Paradise/Javascript-Applications-Teamwork/blob/master/screenshots/TODO.jpg "TODOs")
+
+* calendar
+
+![alt text](https://github.com/Team-Paradise/Javascript-Applications-Teamwork/blob/master/screenshots/calendar.jpg "calendar")
+
+---
+
+#### Used libraries and technologies:
+* system\.js
+* Socket\.IO
+* jQuery
+
+### Backend 
+* Mongoose
+* MongoLab
+* body-parser
+* express
+
+### Frontend
+* babel-core
+* bootstrap
+* handlebars
+* toastr
+* KendoIU
+* etc.
