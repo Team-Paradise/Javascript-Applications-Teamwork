@@ -17,9 +17,10 @@ function loginUser() {
         // TODO: set promises
 
         $.ajax({
-            url: 'User',
+            method: 'POST',
+            url: 'user/login',
             contentType: 'application/json',
-            data: currentUser,
+            data: JSON.stringify(currentUser),
             success: function (data) {
                 console.log(data);
                 toggleLoginPartials(data.username);

@@ -11,15 +11,15 @@ module.exports = {
         //TODO: module + promises -> send response only when the query to db is ready!
         // TODO: dont send the pass to the client, hash the pass before sending to db (crypto)
         User.findOne({
-            'username': req.query.username,
-            'passHash': req.query.passHash
+            'username': req.body.username,
+            'passHash': req.body.passHash
         }, function (err, user) {
             if (err) {
                 console.log('Error searching in db: ' + err);
                 res.status(404);
                 next();
             } else if (user) {
-                if (req.query.passHash === user.passHash) {
+                if (req.body.passHash === user.passHash) {
                     res.json(user); // move out in promise
                     next();
                 }

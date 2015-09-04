@@ -4,7 +4,7 @@ var userController = require('../controllers/usersController'),
 
 module.exports = function (app) {
     require('./../utils/validation')(app);
-    app.get('/User', userController.login);
+
     app.get('/groups', groupController.getGenericInfo);
     app.get('/groups/feed', groupController.getFeed);
     app.get('/groups/meetings', groupController.getMeetings);
@@ -17,6 +17,7 @@ module.exports = function (app) {
     // DONE: check if the user is already registred
     // DONE: if not -> send data to database and return success
     app.post('/signup', userController.signup);
+    app.post('/user/login', userController.login);
     app.post('/groups/signup', groupController.signup);
     app.post('/groups/add/member', groupController.addMember);
     app.post('/groups/add/task', groupController.addTask);
