@@ -30,6 +30,10 @@ button a:hover{
 }
 
 footer {
+    position:relative;
+   left:0px;
+   bottom:0px;
+   width:100%;
     margin-left:30px;
     margin-right:30px;
     border-top: 1px solid #CCC;
@@ -71,8 +75,8 @@ footer {
 }
 
 #group-container{
-    width: 670px;
-    height: 440px;
+    min-height: 400px;
+    max-width: 50%;
     margin-left: 310px;
 }
 
