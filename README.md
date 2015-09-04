@@ -28,27 +28,28 @@ this [Link](http://paradise-platform.herokuapp.com) to try
 ---
 An application that supports development process by providing various tools to aid teamwork all in one place. It contains the following modules...
 * user registration 
-* 
+
 ![alt text](https://github.com/Team-Paradise/Javascript-Applications-Teamwork/blob/master/screenshots/userReg.jpg "user registration")
 
 * group registration
+
 * group management
-* 
+
 ![alt text](https://github.com/Team-Paradise/Javascript-Applications-Teamwork/blob/master/screenshots/groupManagement.jpg "group management")
 
 * meetings arrangement
-* 
+
 ![alt text](https://github.com/Team-Paradise/Javascript-Applications-Teamwork/blob/master/screenshots/meetings.jpg "meetings")
 
 * chat 
-* 
+
 ![alt text](https://github.com/Team-Paradise/Javascript-Applications-Teamwork/blob/master/screenshots/chat.jpg "chat")
 * TODO list
-* 
+
  ![alt text](https://github.com/Team-Paradise/Javascript-Applications-Teamwork/blob/master/screenshots/TODO.jpg "TODOs")
 
 * calendar
-* 
+
 ![alt text](https://github.com/Team-Paradise/Javascript-Applications-Teamwork/blob/master/screenshots/calendar.jpg "calendar")
 
 ---
