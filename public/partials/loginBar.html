@@ -1,0 +1,20 @@
+<div class="navbar-right">
+    <form id="loginForm" class="navbar-form">
+        <div class="form-group">
+            <input type="text" id="username" placeholder="username" class="form-control"/>
+            <input type="password" id="pass" placeholder="password" class="form-control"/>
+        </div>
+        <button id="sign-up-button" class="btn btn-primary pull-right"> <a  href="#sign-up-form">Sign Up</a></button>
+        <button type="submit" id="loginSubmit" class="btn btn-primary pull-right">Log in</button>
+    </form>
+    <ul style="display: none" id="logged-user" class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a id="user-profile-dropdown" class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a id="logout-button" href="#home">Logout</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
