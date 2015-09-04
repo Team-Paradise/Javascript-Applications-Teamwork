@@ -11,6 +11,7 @@ module.exports = function (app) {
     app.get('/groups/tasks', groupController.getTasks);
     app.get('/groups/calendar', groupController.getCalendar);
     app.get('/users/groups', groupController.listGroups);
+    app.get('/groups/remove/task', groupController.removeTask);
 
 
     // TODO: simple validation of fortmat of email. pass...

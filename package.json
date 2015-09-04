@@ -1,16 +1,24 @@
 {
-  "name": "SimpleSetUpTest",
-  "version": "0.0.1",
+  "name": "paradise-telerik-academy-team-project",
+  "version": "0.0.0",
+  "authors": [
+    "Mariya Steffanova <mariya.steffanova@gmail.com>",
+    "Zlatko Atanasov <zlatkoatanasov92@gmail.com>",
+    "Kiril Kolev <kiril.kolev81@abv.bg>"
+  ],
   "main": "server.js",
   "scripts": {
     "start": "node app"
   },
+  "engines": {
+    "node": "0.12.x",
+    "npm": "2.7.x"
+  },
   "dependencies": {
+    "jquery" : "2.1.4",
     "body-parser": "^1.13.3",
     "express": "^2.0.x",
     "mongoose": "^3.8.x",
-    "passport": "^0.2.0",
-    "passport-local": "^1.0.0",
     "socket.io": "1.3.6"
   }
 }
