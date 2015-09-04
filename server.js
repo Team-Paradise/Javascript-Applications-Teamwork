@@ -3,7 +3,7 @@ var express = require('express');
 var app = require('express').createServer();
 
 
-var env = /* process.env.NODE_ENV ||*/ 'development';  // make sure we wont touch the database
+var env =  process.env.NODE_ENV || 'development';  // make sure we wont touch the database
 var config = require('./server/config/config')[env];
 var port = config.port;
 

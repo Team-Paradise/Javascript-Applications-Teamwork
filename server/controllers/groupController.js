@@ -13,7 +13,7 @@ module.exports = {
             'name': newGroup.name
         }, function (err, user) {
             if (err) {
-               // console.log('Error searching in db: ' + err);
+                // console.log('Error searching in db: ' + err);
                 res.status(404);
                 return next();
             } else if (user) {
@@ -88,25 +88,51 @@ module.exports = {
             return next();
         }
         Group.findOne({name: req.body.name}, function (err, info) {
-                if (err) return res.send("contact create error: " + err);
+            if (err) return res.send("contact create error: " + err);
 
-                // add the task to the group todos
-                Group.findByIdAndUpdate(
-                    info._id,
-                    {$push: {"tasks": req.body.task}},
-                    {safe: true, upsert: true},
-                    function (err, model) {
-                        if (err) {
+            // add the task to the group todos
+            Group.findByIdAndUpdate(
+                info._id,
+                {$push: {"tasks": req.body.task}},
+                {safe: true, upsert: true},
+                function (err, model) {
+                    if (err) {
 
-                            res.status(400);
-                        }
-                        res.json({name: model.name, tasks: model.tasks});
-                        console.log(model);
+                        res.status(400);
                     }
-                );
-            }
-        )
-        ;
+                    res.json({name: model.name, tasks: model.tasks});
+                    console.log(model);
+                }
+            );
+        });
+    },
+
+    removeTask: function (req, res, next) {
+        if (!req.query.name) {
+            res.status(400)
+                .json({message: 'Please select group from the dropdown menu !'})
+            return next();
+        }
+        Group.findOne({name: req.query.name}, function (err, info) {
+            if (err) return res.send("contact create error: " + err);
+            info.tasks.pull(req.query.taks);
+            // add the task to the group todos
+            /*Group.findByIdAndUpdate(
+             info._id,
+             {$pull: {"tasks": req.query.task}},
+             false,
+             true,
+             function (err, model) {
+             if (err) {
+
+             res.status(400);
+             }
+
+             res.json({name: model.name, tasks: model.tasks});
+             console.log(model);
+             }
+             );*/
+        });
     },
 
     getTasks: function (req, res, next) {
@@ -206,6 +232,7 @@ module.exports = {
             }
         });
     },
+
     getFeed: function (req, res, next) {
 
     },

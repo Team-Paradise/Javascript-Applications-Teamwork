@@ -2,17 +2,20 @@ var mongoose = require('mongoose'),
     User = mongoose.model('User'),
     Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
+
 require('./User');
+
 var groupSchema = new Schema({
     name: {type: String},
     password: {type: String},
     description: {type: String},
     git: {type: String},
-    tasks: {type: [String]}, // think of type
+    tasks: {type: [String]},
+    completedTasks: {type: [String]},
     //events: {type: [String]}, // think of type
     meetings: [{
-        date: {type: String, required:true},
-        about: {type: String, required:true}
+        date: {type: String, required: true},
+        about: {type: String, required: true}
     }], // think of type
     messages: [{
         sender: {type: String, required: true},

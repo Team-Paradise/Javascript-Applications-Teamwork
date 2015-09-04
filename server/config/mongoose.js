@@ -15,9 +15,9 @@ module.exports = function (config) {
         } else {
             console.log("Database feeling fine and running");
 
-            mongoose.connection.db.dropDatabase();
+           /* mongoose.connection.db.dropDatabase();
             console.log('----------');
-            console.log("Database droped..");
+            console.log("Database droped..");*/
         }
     });
 
@@ -25,7 +25,7 @@ module.exports = function (config) {
         console.log('Database error: ' + err);
     });
 
-    User.createInitialUsers();
+   // User.createInitialUsers();
     // Group.createInitialGroups();
 
 
