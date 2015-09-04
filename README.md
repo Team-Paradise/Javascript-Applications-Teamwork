@@ -22,34 +22,48 @@
 [Guthub](https://github.com/Team-Paradise/Javascript-Applications-Teamwork) repository - 
 this [Link](http://paradise-platform.herokuapp.com) to try
 
-![alt text](https://github.com/Team-Paradise/Javascript-Applications-Teamwork/tree/master/screenshots/overall_view.jpg "overall view")
+![alt text](https://github.com/Team-Paradise/Javascript-Applications-Teamwork/blob/master/screenshots/overall_view.jpg "overall view")
 
 
 ---
 An application that supports development process by providing various tools to aid teamwork all in one place. It contains the following modules...
 * user registration 
-![alt text](https://github.com/Team-Paradise/Javascript-Applications-Teamwork/tree/master/screenshots/userReg.jpg "user registration")
+* 
+![alt text](https://github.com/Team-Paradise/Javascript-Applications-Teamwork/blob/master/screenshots/userReg.jpg "user registration")
+
 * group registration
 * group management
-![alt text](https://github.com/Team-Paradise/Javascript-Applications-Teamwork/tree/master/screenshots/groupManagement.jpg "group management")
+* 
+![alt text](https://github.com/Team-Paradise/Javascript-Applications-Teamwork/blob/master/screenshots/groupManagement.jpg "group management")
+
 * meetings arrangement
-![alt text](https://github.com/Team-Paradise/Javascript-Applications-Teamwork/tree/master/screenshots/meetings.jpg "meetings")
+* 
+![alt text](https://github.com/Team-Paradise/Javascript-Applications-Teamwork/blob/master/screenshots/meetings.jpg "meetings")
+
 * chat 
-![alt text](https://github.com/Team-Paradise/Javascript-Applications-Teamwork/tree/master/screenshots/chat.jpg "chat")
+* 
+![alt text](https://github.com/Team-Paradise/Javascript-Applications-Teamwork/blob/master/screenshots/chat.jpg "chat")
 * TODO list
- ![alt text](https://github.com/Team-Paradise/Javascript-Applications-Teamwork/tree/master/screenshots/TODO.jpg "TODOs")
+* 
+ ![alt text](https://github.com/Team-Paradise/Javascript-Applications-Teamwork/blob/master/screenshots/TODO.jpg "TODOs")
+
 * calendar
-![alt text](https://github.com/Team-Paradise/Javascript-Applications-Teamwork/tree/master/screenshots/calendar.jpg "calendar")
+* 
+![alt text](https://github.com/Team-Paradise/Javascript-Applications-Teamwork/blob/master/screenshots/calendar.jpg "calendar")
+
 ---
+
 #### Used libraries and technologies:
 * system\.js
 * Socket\.IO
 * jQuery
+
 ### Backend 
 * Mongoose
 * MongoLab
 * body-parser
 * express
+
 ### Frontend
 * babel-core
 * bootstrap
