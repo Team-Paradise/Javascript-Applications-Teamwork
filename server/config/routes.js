@@ -12,7 +12,7 @@ module.exports = function (app) {
     app.get('/groups/calendar', groupController.getCalendar);
     app.get('/users/groups', groupController.listGroups);
     app.get('/groups/remove/task', groupController.removeTask);
-
+    app.get('/groups/add/member', groupController.addMember);
 
     // TODO: simple validation of fortmat of email. pass...
     // DONE: check if the user is already registred

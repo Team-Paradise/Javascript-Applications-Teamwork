@@ -42,11 +42,11 @@ export default function switchControllers(partial) {
                     };
                     break;
                 case 'feed':
-                    data = {container: $groupContainer, contentDataRoute: '', controller: feedController};
+                    data = {container: $groupContainer, contentDataRoute: 'groups/feed', controller: feedController};
                     break;
                 case 'meetings':
                     data = {
-                        container: $groupContainer, contentDataRoute: '', controller: meetingsController
+                        container: $groupContainer, contentDataRoute: 'groups/meetings', controller: meetingsController
                     };
                     break;
                 case 'todo-list':
@@ -57,11 +57,14 @@ export default function switchControllers(partial) {
                     break;
                 case 'calendar':
                     data = {
-                        container: $groupContainer, contentDataRoute: '', controller: calendarController
+                        container: $groupContainer, contentDataRoute: 'groups/meetings', controller: calendarController
                     };
                     break;
                 case 'add-member':
                     data = {container: $groupContainer, contentDataRoute: '', controller: membersController};
+                    break;
+                case 'soon':
+                    data = {container: $groupContainer, contentDataRoute: '', controller: chatController};
                     break;
                 //DEBUG:
 

@@ -1,5 +1,6 @@
 import {addRoom} from './../controllers/chatDataManager.js';
 import addGroupMember from './../models/Group.js';
+import toastr from 'lib/toastr/toastr.js';
 
 function signUp(data) {
     var promise = new Promise(function (resolve, reject) {
@@ -12,6 +13,7 @@ function signUp(data) {
                 'x-authkey': JSON.parse(localStorage.getItem('access-token'))
             },
             success: function (data) {
+                localStorage.setItem('current-group', JSON.stringify(data.name));
                 addRoom(data.name);
                 console.log(data);
                 resolve(data);
@@ -40,7 +42,8 @@ export default function signupGroupController() {
             description: $('#input-group-desc').val(),
             git: $('#input-git-link').val()
         };
-        localStorage.setItem('current-group', JSON.stringify(newGroup.name));
+
+
         signUp(newGroup).then(function (data, err) {
             if (err) {
                 console.log(err);
@@ -48,7 +51,11 @@ export default function signupGroupController() {
             var creator = JSON.parse(localStorage.getItem('user'));
             addGroupMember(creator);
             // TODO: when redirect should do it after addGroupMember -> move it in promise
-            //location.hash = "#group-nav";
+            location.hash = "#home";
+        }, function(err){
+            console.log(err);
+            var message = JSON.parse(err.responseText).message || 'Something happend..';
+            toastr.error(message);
         });
 
 

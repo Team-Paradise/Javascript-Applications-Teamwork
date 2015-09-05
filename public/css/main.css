@@ -1,7 +1,14 @@
 body{
     margin-top: 100px;
 }
+a {
+    color: white;
+}
 
+a:hover{
+    color: white;
+    text-decoration: none;
+}
 button a {
     color: white;
 }
@@ -10,6 +17,7 @@ button a:hover{
     color: white;
     text-decoration: none;
 }
+
 
 .navbar-right .navbar-form input, .navbar-right .navbar-form button {
   margin-right: 10px;

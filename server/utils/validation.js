@@ -7,8 +7,8 @@ function auth(req, res, next) {
         console.log('-----------NO AUTH KEY')
         req.user = null;
         res.status(401).json({message: 'You have to be login to access this page!'});
-        next();
-        return;
+        return;  next();
+
     }
     Users.findOne({
         authKey: authKey
@@ -16,14 +16,14 @@ function auth(req, res, next) {
         if (err) {
             console.log('------NOPE :D');
             res.status(404)
-                .json(err);
-            next();
+                .json({message: 'Perhaps there is a problem with the database. Please refresh the page and try again :)'});
+          return;
         }
         if (!users) {
             res.status(401).json(
                 {message: 'Your access-token key is missing. Please try to log out and log in again. If you still have problems, please contact us. Best regards, Paradise Team.'})
-            next();
-            return;
+           return;
+
         }
 
         var user = users[0] || null;

@@ -3,11 +3,13 @@ import 'lib/jquery/dist/jquery.js';
 import {loginUser, logoutUser,toggleLoginPartials} from './controllers/loginController.js';
 import switchControllers from './routes.js';
 
+
 export function init() {
     var $loginBar = $('#loginBar');
 
+
     document.location.hash = "#/";
-     document.location.hash = "#home";
+    document.location.hash = "#home";
 
     /* Some usefull options for toastr:
      toastr.options = {
@@ -31,23 +33,19 @@ export function init() {
 
     console.log('-----------HASH');
     var hash = JSON.parse(localStorage.getItem('route'));
-   /* var path = hash.replace("#", "");
-    switchControllers(path);*/
+    /* var path = hash.replace("#", "");
+     switchControllers(path);*/
 
 
     $loginBar.load('partials/loginBar.html', function () {
         if (!localStorage.getItem('is-logged')) {
-            loginUser();
-
-            /* $('#sign-up-button').on('click', function () {
-             $mainContainer.load('partials/sign-up-form.html');
-             });*/
         } else {
             console.log('my username is taken from storage');
             var currentUsername = JSON.parse(localStorage.getItem('user'));
+
             toggleLoginPartials(currentUsername);
         }
-
+        loginUser();
         logoutUser();
     });
 

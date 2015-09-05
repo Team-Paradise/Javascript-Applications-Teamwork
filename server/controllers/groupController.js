@@ -14,7 +14,7 @@ module.exports = {
         }, function (err, user) {
             if (err) {
                 // console.log('Error searching in db: ' + err);
-                res.status(404);
+                res.status(404).json({message: 'We have some problems with the database.. Please refresh your page and try again :)'});
                 return next();
             } else if (user) {
                 res.status(422).json({message: 'Group with this name already exist!'});
@@ -65,7 +65,9 @@ module.exports = {
             console.log('--------------');
             if (err) {
 
-                res.status(400); // TODO: check the real err code
+                res.status(400)
+                    .json({message: 'We have some problems with the database, please refresh the page and try again. :)'});
+                     return next();// TODO: check the real err code
             } else if (!group) {
                 res.status(404)
                     .json({message: 'Select group to add member. You can select a group from the dropdown menu "Groups""'});
@@ -97,9 +99,10 @@ module.exports = {
                 {safe: true, upsert: true},
                 function (err, model) {
                     if (err) {
-
                         res.status(400);
+                        return next();
                     }
+                    // TODO: return err if there is no group
                     res.json({name: model.name, tasks: model.tasks});
                     console.log(model);
                 }
@@ -144,12 +147,14 @@ module.exports = {
         Group.findOne({name: req.query.name}, function (err, data) {
 
             if (err) {
-                res.status(400);
-                next();
+                res.status(400)
+                    .json({message: 'We have some problems with the database. Plaese refresh the page and try again. :)'});
+                return next();
             }
             if (!data && !Array.isArray(data)) {
-                res.status(404);//.json('Please, select group!');
-                next();
+                res.status(404)
+                    .json({message: 'Please select group from the dropdown menu!'});//.json('Please, select group!');
+                return next();
             } else {
 
                 res.json({tasks: data.tasks});
@@ -199,7 +204,7 @@ module.exports = {
             res.status(400).json({message: 'Please login'});
             return next();
         }
-
+// TODO: if we want do reject access if the user dont have groups: !req.name
 
         User.findOne({
             'username': req.query.user
@@ -220,6 +225,7 @@ module.exports = {
                     if (err) {
 
                         res.status(404);
+                        return next();
                     } else {
                         res.json({info: groups});
                     }
@@ -256,7 +262,9 @@ module.exports = {
 
         Group.findOne({name: req.body.group}).populate('meetings').exec(function (err, group) {
             if (err) {
-                res.status(404);
+                res.status(404)
+                    .json({message: 'We have some problems with the database. Please refresh the page and try again!'});
+                return next();
             }
             group.meetings.push(newMeeting);
             group.save();
@@ -267,16 +275,19 @@ module.exports = {
     },
 
     getMeetings: function (req, res, next) {
-        if (!req.query.name) {
-            res.status(400).json({massage: 'Please, select a group from the dropdown menu!'});
+        if (!req || !req.query || !req.query.name) {
+            res.status(400).json({message: 'Please, select a group from the dropdown menu!'});
+            return next();
         }
         Group.findOne({name: req.query.name}, function (err, data) {
 
             if (err) {
                 res.status(400).json({meeting: ''});
+                return next();
             }
 
             res.json({meetings: data.meetings});
+
         })
     },
 

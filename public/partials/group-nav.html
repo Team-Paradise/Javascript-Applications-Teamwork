@@ -8,12 +8,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <li class="dropdown">
-                {{#this.info}}
-                <a class="navbar-brand dropdown-toggle" data-toggle="dropdown" role="button"
-                   aria-expanded="false">Group {{this.name}}</span></a>
-                {{/this.info}}
-            </li>
+            <div class="navbar-brand dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Groups
+                    <span class="caret"></span></a>
+                <ul id="switch-group-bar" class="dropdown-menu" role="menu">
+                    {{#each this.info}}
+                    <li><a href="#group-nav">{{this.name}}</a></li>
+                    {{/each}}
+                </ul>
+            </div>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
@@ -23,15 +26,7 @@
                 <li><a href="#todo-list">TODOs</a></li>
                 <li><a href="#chat">Messages</a></li>
                 <li><a href="#calendar">Calendar</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Groups
-                        <span class="caret"></span></a>
-                    <ul id="switch-group-bar" class="dropdown-menu" role="menu">
-                        {{#each this.info}}
-                        <li><a href="#group-nav">{{this.name}}</a></li>
-                        {{/each}}
-                    </ul>
-                </li>
+
             </ul>
 
         </div>
@@ -42,23 +37,23 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
         <ul class="nav sidebar-nav">
             <li>
-                <a href="#">Home</a>
+                <a href="#soon">Home</a>
             </li>
             <li>
                 <a href="#add-member">Add member</a>
             </li>
             <li>
-                <a href="#">Events</a>
+                <a href="#soon">Events</a>
             </li>
             <li>
-                <a href="#">Team</a>
+                <a href="#soon">Team</a>
             </li>
 
             <li>
-                <a href="#">Services</a>
+                <a href="#soon">Services</a>
             </li>
             <li>
-                <a href="#">Contact</a>
+                <a href="#soon">Contact</a>
             </li>
             <li>
                 {{#this.info}}

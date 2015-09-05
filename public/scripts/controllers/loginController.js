@@ -4,14 +4,14 @@ import toastr from 'lib/toastr/toastr.js';
 import homeController from './../controllers/homeController.js';
 
 function loginUser() {
-	var currentUser = {
+    var currentUser = {
         username: '',
-        passHash : ''
+        passHash: ''
     };
-    
+
     $('#loginSubmit').on('click', function () {
         currentUser.username = $('#username').val();
-        currentUser.passHash=  CryptoJS.SHA1( $('#pass').val()).toString();
+        currentUser.passHash = CryptoJS.SHA1($('#pass').val()).toString();
 
         // DONE: post data for the user on server, check in db for the user
         // TODO: set promises
@@ -24,13 +24,12 @@ function loginUser() {
             success: function (data) {
                 console.log(data);
                 toggleLoginPartials(data.username);
+                var username = JSON.stringify(data.username);
                 localStorage.setItem('is-logged', true);
                 localStorage.setItem('access-token', JSON.stringify(data.authKey));
-                localStorage.setItem('user', JSON.stringify(data.username));
-
+                localStorage.setItem('user', username);
                 //TODO: can be done with method redirect..
                 homeController();  // move to promise
-
 
 
             },
@@ -42,7 +41,7 @@ function loginUser() {
         });
 
         return false;
-    });	
+    });
 }
 
 function logoutUser() {
@@ -51,6 +50,7 @@ function logoutUser() {
         localStorage.clear();
         homeController();
     });
+
 }
 
 function toggleLoginPartials(data) {

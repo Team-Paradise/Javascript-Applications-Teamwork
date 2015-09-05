@@ -1,7 +1,7 @@
 import toastr from 'lib/toastr/toastr.js';
 import {validUserNamePassword, validName, validEmail} from '../validator.js';
 import {addClient} from './../controllers/chatDataManager.js';
-import {toggleLoginPartials} from './../controllers/loginController.js'
+import {toggleLoginPartials} from './../controllers/loginController.js';
 
 
 
@@ -81,11 +81,13 @@ export default function signupController() {
                 success: function (data) {
 
                     localStorage.setItem('user', JSON.stringify(data.username));
+                    localStorage.setItem('is-logged', true);
                     localStorage.setItem('access-token', JSON.stringify(data.authKey));
+
 
                     // TODO: Login the user automatic
                     toggleLoginPartials(data.username);
-                    addClient(data);
+                    addClient(data.username);
                     location.hash = "#home";
                     // todo: save tokan also where Zlatko save the user name in local storage!!!
                 },

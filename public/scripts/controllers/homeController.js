@@ -9,7 +9,7 @@ export default function homeController() {
 
     $groupContainer.html('');
 
-    if (!!localStorage.getItem('user')) {
+    if (!!localStorage.getItem('user') && !!localStorage.getItem('is-logged')) {
         $jumbotronButton.on('click', function () {
             // TODO: think what if I want to register more than one profile?
             // TODO: fix bug: when you register a user you are not login so you cant lgout -> you cant registwe new profile

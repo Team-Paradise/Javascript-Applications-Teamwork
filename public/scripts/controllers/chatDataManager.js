@@ -23,4 +23,4 @@ function addRoom(group){
     })
 }
 
-export {addClient, joinRoom, addRoom}
+export {addClient, joinRoom, addRoom, socket}
