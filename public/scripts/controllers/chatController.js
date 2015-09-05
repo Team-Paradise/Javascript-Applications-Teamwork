@@ -23,10 +23,10 @@ export default function chatController() {
             }
         });
 
-        socket.on('new-message', function (username, msg) {
-            console.log(msg);
-            $(document.createTextNode(msg)).appendTo($chat);
-            $chat.append('<b>' + username + ': </b>' + msg + '<br>');
+        socket.on('new-message', function (data, msg) {
+
+            $chat.append('<b>' + data.username + ': </b>' + msg + '<br>');
+            console.log(data.username);
 
         });
     }
