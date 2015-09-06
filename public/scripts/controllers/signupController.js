@@ -6,7 +6,7 @@ import {toggleLoginPartials} from './../controllers/loginController.js';
 
 
 export default function signupController() {
-    console.log('Hello from SIGN UP controller');
+   // console.log('Hello from SIGN UP controller');
     var $username = $('#inputUsername'),
         $password = $('#inputPassword'),
         $passConfirm = $('#confirmPassword'),
@@ -72,7 +72,7 @@ export default function signupController() {
                 aboutMe: $aboutme.val()
             };
 
-            console.log(newUser);
+          //  console.log(newUser);
             $.ajax({
                 method: 'POST',
                 url: '/signup',
