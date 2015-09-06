@@ -12,5 +12,5 @@ export default function groupNavController() {
 
     });
 
-    console.log('group navigation loaded');
+  //  console.log('group navigation loaded');
 }

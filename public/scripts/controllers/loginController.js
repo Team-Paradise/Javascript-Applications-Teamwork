@@ -22,7 +22,7 @@ function loginUser() {
             contentType: 'application/json',
             data: JSON.stringify(currentUser),
             success: function (data) {
-                console.log(data);
+              //  console.log(data);
                 toggleLoginPartials(data.username);
                 var username = JSON.stringify(data.username);
                 localStorage.setItem('is-logged', true);

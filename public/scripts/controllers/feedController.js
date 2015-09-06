@@ -1,3 +1,3 @@
 export default function feedController() {
-        console.log('feed page loaded');
+       // console.log('feed page loaded');
     }

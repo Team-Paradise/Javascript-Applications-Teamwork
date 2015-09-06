@@ -101,7 +101,7 @@ export default function signupController() {
                             toastr.error('Sadly.. something happand with the database..');
                             break;
                         case '422':
-                            console.log('string');
+                           // console.log('string');
                             break;
                         default:
                             break;
@@ -112,7 +112,7 @@ export default function signupController() {
             });
         }
         else {
-            console.log('invalid user data');
+         //   console.log('invalid user data');
             // TODO tooltip
             return false;
         }

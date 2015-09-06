@@ -1,4 +1,6 @@
 import handlebars from 'lib/handlebars/handlebars.js';
+import toastr from 'lib/toastr/toastr.js';
+
 var URLs = {
     SAVE_TODO: 'groups/add/task',
     DELETE_TODO: '/groups/remove/task'
@@ -9,7 +11,7 @@ export default function todoController() {
 
 
     var currentGroupNameTest = JSON.parse(localStorage.getItem('current-group'));
-    console.log('todo page loaded');
+   // console.log('todo page loaded');
     /*  $("#sortable").sortable();
      $("#sortable").disableSelection();*/
 
@@ -48,8 +50,8 @@ export default function todoController() {
 //delete done task from "already done"
     $('.todolist').on('click', '.remove-item', function () {
         var todoD = $(this).parent().parent().text();
-        console.log('-----------TODO for DELETE-----------');
-        console.log(todoD);
+     /*   console.log('-----------TODO for DELETE-----------');
+        console.log(todoD);*/
         removeItem(this);
     });
 
@@ -110,19 +112,21 @@ export default function todoController() {
                 'x-authkey': JSON.parse(localStorage.getItem('access-token'))
             },
             success: function (data) {
-                console.log(data)
-                console.log(data.tasks);
+              /*  console.log(data)
+                console.log(data.tasks);*/
 
             },
             error: function (data) {
-                console.log('Error saving task: ');
-                console.log(data);
+               /* console.log('Error saving task: ');
+                console.log(data);*/
             }
         });
     }
 
     function deleteTodo(groupName, todo, url) {
-        $.ajax({
+        toastr.info('Removing tasks is yet unavailable. We are sorry.. it\'s comming soon!');
+
+       /* $.ajax({
             url: url,
             contentType: 'application/json',
             data: {name: groupName, task: todo},
@@ -130,14 +134,14 @@ export default function todoController() {
                 'x-authkey': JSON.parse(localStorage.getItem('access-token'))
             },
             success: function (data) {
-                console.log(data)
-                console.log(data.tasks);
+              /!*  console.log(data)
+                console.log(data.tasks);*!/
 
             },
             error: function (data) {
-                console.log('Error deleting task: ');
-                console.log(data);
+              /!*  console.log('Error deleting task: ');
+                console.log(data);*!/
             }
-        })
+        })*/
     }
 }

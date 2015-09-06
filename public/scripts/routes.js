@@ -23,7 +23,7 @@ export default function switchControllers(partial) {
     var getActionOnHashChange = function (partialName) {
         var promise = new Promise(function (resolve, reject) {
             var data;
-            console.log(partialName);
+          //  console.log(partialName);
             switch (partialName) {
                 case 'home':
                     data = {container: $mainContainer, contentDataRoute: '', controller: homeController};
@@ -95,7 +95,7 @@ export default function switchControllers(partial) {
                             'x-authkey': JSON.parse(localStorage.getItem('access-token'))
                         },
                         success: function (data) {
-                            console.log('SUCCESS!!!!');
+                         //   console.log('SUCCESS!!!!');
 
 
                             resolve({action: action, info: data});
@@ -132,7 +132,7 @@ export default function switchControllers(partial) {
     }
 
     return function () {
-        console.log('hello from show page');
+     //   console.log('hello from show page');
         var url = 'partials/' + partial + '.html';
         var context;
         // 1. get action
@@ -152,7 +152,7 @@ export default function switchControllers(partial) {
                             })
                     }, function (err) {
                         if (err) {
-                            console.log(err);
+                          //  console.log(err);
                             var message = err.message || 'Something happend.. line 139';
                             toastr.error(message);
                             return;

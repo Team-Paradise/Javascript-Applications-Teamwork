@@ -5,15 +5,11 @@ export default function chatController() {
     var $messageField = $("#message"),
         $chat = $("#chat"),
         $submitBtn = $("#submitBtn");
-   /* addClient(globalCurrentUser);
-    addRoom(globalCurrentGroup);
-    joinRoom(globalCurrentUser, globalCurrentGroup);*/
+    addClient(JSON.parse(localStorage.getItem('user')));
+    addRoom(JSON.parse(localStorage.getItem('current-group')));
+    joinRoom({ user:JSON.parse(localStorage.getItem('user')), group:JSON.parse(localStorage.getItem('current-group')),});
     // socket.emit('');
-    console.log('SOCKETS');
-    console.log(socket);
-    console.log(socket.username);
-    console.log(socket.room);
-    console.log('---------');
+
     $submitBtn.on('click', function (ev) {
         ev.preventDefault();
         if ($messageField.val()) {

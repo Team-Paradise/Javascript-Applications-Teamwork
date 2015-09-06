@@ -31,7 +31,7 @@ export function init() {
      };*/
 
 
-    console.log('-----------HASH');
+  //  console.log('-----------HASH');
     var hash = JSON.parse(localStorage.getItem('route'));
     /* var path = hash.replace("#", "");
      switchControllers(path);*/
@@ -40,7 +40,7 @@ export function init() {
     $loginBar.load('partials/loginBar.html', function () {
         if (!localStorage.getItem('is-logged')) {
         } else {
-            console.log('my username is taken from storage');
+          //  console.log('my username is taken from storage');
             var currentUsername = JSON.parse(localStorage.getItem('user'));
 
             toggleLoginPartials(currentUsername);
@@ -57,8 +57,14 @@ export function init() {
     });
 
     $(window).on('hashchange', function (e) {
-        console.log('hash change in window');
+      //  console.log('hash change in window');
         var path = location.hash.replace("#", "");
         switchControllers(path);
+    });
+
+   
+    // If the user login / logout from one tab it will reflect on all tabs
+   window.addEventListener('storage', function (event) {
+        window.location.reload();
     });
 };

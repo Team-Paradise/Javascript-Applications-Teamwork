@@ -47,14 +47,14 @@ export default function chatController() {
             contentType: 'application/json',
             data: JSON.stringify({name: 'Paradise', sender: 'Az', msg: $messageField.val()}),
             success: function (data) {
-                console.log(data);
+
                 $(document.createTextNode(data.sender)).appendTo($chat);
                 $(document.createTextNode(data.msg)).appendTo($chat);
 
                 $chat.append('</br>');
             },
             error: function (data) {
-                console.log('Error posting msg: ' + data);
+
             }
         })
     }

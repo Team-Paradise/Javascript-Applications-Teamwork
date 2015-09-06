@@ -36,7 +36,7 @@ module.exports = function (server) {
 
         socket.on('join-room', function (data, callback) {
             console.log('---------ROOM TO JOIN');
-            console.log(data.group in rooms);
+            console.log(data.group);
             console.log(rooms.indexOf(data.group));
             if(rooms.indexOf(data.group) >= 0 ){
                 callback(true);

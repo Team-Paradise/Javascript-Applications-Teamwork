@@ -15,12 +15,12 @@ function signUp(data) {
             success: function (data) {
                 localStorage.setItem('current-group', JSON.stringify(data.name));
                 addRoom(data.name);
-                console.log(data);
+              //  console.log(data);
                 resolve(data);
             },
             error: function (data) {
                 reject(data);
-                console.log(data);
+              //  console.log(data);
             }
         });
     });
@@ -35,7 +35,7 @@ export default function signupGroupController() {
     var btnSumbit = $('#group-signup-submit');
     var newGroup;
     btnSumbit.on('click', function () {
-        console.log('CLICK');
+      //  console.log('CLICK');
         newGroup = {
             name: $('#input-group-name').val(),
             password: $('#input-group-password').val(),
@@ -46,14 +46,14 @@ export default function signupGroupController() {
 
         signUp(newGroup).then(function (data, err) {
             if (err) {
-                console.log(err);
+              //  console.log(err);
             }
             var creator = JSON.parse(localStorage.getItem('user'));
             addGroupMember(creator);
             // TODO: when redirect should do it after addGroupMember -> move it in promise
             location.hash = "#home";
         }, function(err){
-            console.log(err);
+          //  console.log(err);
             var message = JSON.parse(err.responseText).message || 'Something happend..';
             toastr.error(message);
         });

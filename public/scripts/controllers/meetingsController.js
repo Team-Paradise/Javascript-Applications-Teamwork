@@ -22,7 +22,7 @@ export default function meetingsController() {
             meetingInformation.about = about;
             meetingInformation.group = JSON.parse(localStorage.getItem('current-group'));
 
-            console.log(meetingInformation);
+          //  console.log(meetingInformation);
             $.ajax({
                 url: '/groups/meetings',
                 method: 'POST',
@@ -36,8 +36,7 @@ export default function meetingsController() {
                     toastr.success('You successfully arranged meeting on ' + data.meeting.date);
                 },
                 error: function (data) {
-                    console.log('--------------ERROR--------MEETING');
-                    console.log(data);
+
                     toastr.options = {"positionClass": "toast-top-center"};
                     toastr.error('Invalid meetings data!');
                 }
