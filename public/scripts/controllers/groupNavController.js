@@ -9,8 +9,7 @@ export default function groupNavController() {
 
         localStorage.setItem('current-group',JSON.stringify( $target.text()));
 
-
     });
 
-  //  console.log('group navigation loaded');
+   // console.log('group navigation loaded');
 }

@@ -141,14 +141,14 @@ export default function switchControllers(partial) {
         //4. set action.controler
 
         getActionOnHashChange(partial)
-            .then(function (data) {
+            .then(function (action) {
 
-                getContext(data)
-                    .then(function (data2) {
-                        test(data2.action, data2.info, url)
-                            .then(function (data3) {
+                getContext(action)
+                    .then(function (data) {
+                        test(data.action, data.info, url)
+                            .then(function (action) {
 
-                                data3.controller();
+                                action.controller();
                             })
                     }, function (err) {
                         if (err) {
