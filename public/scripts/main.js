@@ -2,7 +2,7 @@
 import 'lib/jquery/dist/jquery.js';
 import {loginUser, logoutUser,toggleLoginPartials} from './controllers/loginController.js';
 import switchControllers from './routes.js';
-
+import {joinRoom, leaveRoom} from './controllers/chatDataManager.js';
 
 export function init() {
     var $loginBar = $('#loginBar');
@@ -68,5 +68,16 @@ export function init() {
         if (event.key === "access-token" || event.key === null) {
             window.location.reload();
         }
+        if (event.key === "current-group") {
+            var user = JSON.parse(localStorage.getItem('user'));
+            joinRoom(user, event.newValue);
+            leaveRoom(user, event.oldValue);
+        }
+        // if current-group -> socket.leave oldValue, join newValue, if null handle (can it be nul, when the key is not nell?)
+        // think of leaving when tha key is null...
+        // chek if the room already exist, there are 100 groups Paradise..
+        // save rooms as groups.. anddd posts as messages..
+        // in chatController show the history for the group
+        // parse with Handlebars each data ---> this.sender, this.message
     });
 };

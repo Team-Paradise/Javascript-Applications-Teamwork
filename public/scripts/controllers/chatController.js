@@ -7,7 +7,7 @@ export default function chatController() {
         $submitBtn = $("#submitBtn");
     addClient(JSON.parse(localStorage.getItem('user')));
     addRoom(JSON.parse(localStorage.getItem('current-group')));
-    joinRoom({ user:JSON.parse(localStorage.getItem('user')), group:JSON.parse(localStorage.getItem('current-group')),});
+    joinRoom(JSON.parse(localStorage.getItem('user')),JSON.parse(localStorage.getItem('current-group')));
     // socket.emit('');
 
     $submitBtn.on('click', function (ev) {
@@ -26,10 +26,6 @@ export default function chatController() {
     });
 
     socket.on('new-message', function (data, msg) {
-
-
         $chat.append('<b>' + data + ': </b>' + msg + '<br>');
-
-
     });
 }
