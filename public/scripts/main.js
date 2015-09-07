@@ -6,7 +6,7 @@ import {joinRoom, leaveRoom} from './controllers/chatDataManager.js';
 
 export function init() {
     var $loginBar = $('#loginBar');
-
+    $("body").animate({scrollTop: 0}, "fast");
 
     document.location.hash = "#/";
     document.location.hash = "#home";

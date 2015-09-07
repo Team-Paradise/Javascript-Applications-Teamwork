@@ -1,10 +1,8 @@
 import {joinRoom} from './../controllers/chatDataManager.js';
 import toastr from './../../lib/toastr/toastr.js';
 
-
-
-export default function addMember(member) {
-  //  console.log('------------IN ADD MEMBER');
+function addMember(member) {
+    //  console.log('------------IN ADD MEMBER');
     // var member = $('#input-add-member').val();
 
     var queryAddMember = {
@@ -25,8 +23,8 @@ export default function addMember(member) {
             'x-authkey': JSON.parse(localStorage.getItem('access-token'))
         },
         success: function (data) {
-          /*  console.log('GRPOUP ADDED');
-            console.log(data);*/
+            /*  console.log('GRPOUP ADDED');
+             console.log(data);*/
         },
         error: function (err) {
             var message = JSON.parse(err.responseText).message || 'Something happend..';
@@ -44,10 +42,10 @@ export default function addMember(member) {
             'x-authkey': JSON.parse(localStorage.getItem('access-token'))
         },
         success: function (data) {
-          //  console.log('MEMBER ADDED');
+            //  console.log('MEMBER ADDED');
             // TODO: switch member with data.??
             joinRoom(member, data.name);
-          //  console.log(data);
+            //  console.log(data);
             toastr.success(member + ' successfuly added to group ' + data.name)
         },
         error: function (err) {
@@ -57,5 +55,27 @@ export default function addMember(member) {
     });
 
 
-}//end add member
+}
+
+function addMessage(message){
+    $.ajax({
+        url: 'groups/messages',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(message),
+        headers: {
+            'x-authkey': JSON.parse(localStorage.getItem('access-token'))
+        },
+        success: function (data) {
+            toastr.options = {"positionClass": "toast-top-center"};
+            toastr.success('Message saved ' + data.newMessage.sender);
+        },
+        error: function (data) {
+
+            toastr.options = {"positionClass": "toast-top-center"};
+            toastr.error(data.message);
+        }
+    });
+}
+export {addMember, addMessage}
 

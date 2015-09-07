@@ -53,7 +53,7 @@ export default function switchControllers(partial) {
                     data = {container: $groupContainer, contentDataRoute: 'groups/tasks', controller: todoController};
                     break;
                 case 'chat':
-                    data = {container: $groupContainer, contentDataRoute: '', controller: chatController};
+                    data = {container: $groupContainer, contentDataRoute: 'groups/messages', controller: chatController};
                     break;
                 case 'calendar':
                     data = {
@@ -117,6 +117,7 @@ export default function switchControllers(partial) {
     }
 
     function test(action, context, url) {
+        console.log(context);
         var promise = new Promise(function (resolve, reject) {
             action.container.load(url, function () {
                 $.get(url, function (source) {
@@ -147,7 +148,7 @@ export default function switchControllers(partial) {
                     .then(function (data) {
                         test(data.action, data.info, url)
                             .then(function (action) {
-
+                                $("body").animate({scrollTop: 0}, 0);
                                 action.controller();
                             })
                     }, function (err) {

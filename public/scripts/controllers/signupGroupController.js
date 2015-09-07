@@ -1,5 +1,5 @@
 import {addRoom} from './../controllers/chatDataManager.js';
-import addGroupMember from './../models/Group.js';
+import {addMember} from './../models/Group.js';
 import toastr from 'lib/toastr/toastr.js';
 
 function signUp(data) {
@@ -49,7 +49,7 @@ export default function signupGroupController() {
               //  console.log(err);
             }
             var creator = JSON.parse(localStorage.getItem('user'));
-            addGroupMember(creator);
+            addMember(creator);
             // TODO: when redirect should do it after addGroupMember -> move it in promise
             location.hash = "#home";
         }, function(err){

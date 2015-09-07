@@ -28,7 +28,6 @@ module.exports = function (app) {
         res.json(req.body);
     });
 
-    /*app.post('/groups/messages', groupController.postMessages);
+    app.post('/groups/messages', groupController.addMessage);
      app.get('/groups/messages', groupController.getMessages)
-     */
 };

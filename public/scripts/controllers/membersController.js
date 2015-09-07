@@ -1,8 +1,6 @@
 import {joinRoom} from './../controllers/chatDataManager.js';
-import addGroupMember from './../models/Group.js';
-function addMember(){
-    addGroupMember( $('#input-add-member').val())
-}
+import {addMember} from './../models/Group.js';
+
 
 export default function membersController() {
     var $groupContainer = $('#group-container');

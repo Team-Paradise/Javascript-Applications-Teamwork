@@ -4,12 +4,11 @@ export default function groupNavController() {
 
     $groupContainer.html('');
 
-    $switchGroup.on('click', 'li', function(e){
+    $switchGroup.on('click', 'li', function (e) {
         var $target = $(e.target);
 
-        localStorage.setItem('current-group',JSON.stringify( $target.text()));
-
+        localStorage.setItem('current-group', JSON.stringify($target.text()));
     });
 
-   // console.log('group navigation loaded');
+    // console.log('group navigation loaded');
 }

@@ -25,7 +25,8 @@ module.exports = {
                     name: newGroup.name,
                     members: [],
                     tasks: [],
-                    meetings: []
+                    meetings: [],
+                    messages: []
                 });
                 res.json({name: newGroup.name, members: newGroup.members});
             }
@@ -287,6 +288,52 @@ module.exports = {
             }
 
             res.json({meetings: data.meetings});
+
+        })
+    },
+
+    addMessage: function(req, res, next){
+        if (!req.body.sender || !req.body.msg) {
+            res.status(400)
+                .json({message: 'Sender ot message are missing..'});
+            return next();
+        }
+        if (!req.body.group) {
+            res.status(400)
+                .json({message: 'Plaese, select a group from the dropdown menu!'});
+            return next();
+        }
+        var newMessage = {
+            sender: req.body.sender,
+            msg: req.body.msg
+        };
+
+        Group.findOne({name: req.body.group}).populate('messages').exec(function (err, group) {
+            if (err) {
+                res.status(404)
+                    .json({message: 'We have some problems with the database. Please refresh the page and try again!'});
+                return next();
+            }
+            group.messages.push(newMessage);
+            group.save();
+
+            res.json({newMessage: newMessage});
+        })
+    },
+
+    getMessages: function(req, res, next){
+        if (!req || !req.query || !req.query.name) {
+            res.status(400).json({message: 'Please, select a group from the dropdown menu!'});
+            return next();
+        }
+        Group.findOne({name: req.query.name}, function (err, data) {
+
+            if (err) {
+                res.status(400).json({messeges: ''});
+                return next();
+            }
+
+            res.json({info: data.messages});
 
         })
     },

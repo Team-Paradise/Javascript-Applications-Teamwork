@@ -1,4 +1,4 @@
-<div class="alert alert-info">
+<div class="alertMessage alert-info">
     <br> Work in progress.. Please excuse us, the chat is comming soon.. :)<br/>
     Still some bugs chating on the server
     <br/>
@@ -10,13 +10,22 @@
         <i class="fa fa-github"></i>
         Team-Paradise</a>
 </div>
-<div id="chat" class="container-fluid">
+<div id="chat" class="bs-component">
     <div class="row">
         <h2>Live Chat</h2>
 
         <div id="message-box">
+            <ul class="list-group">
+                {{#each this.info}}
+                <li class="list-group-item well">
+                    <div class="list-group-item-heading text-info">{{this.sender}} </div>
+                    <div class="list-group-item-text text-muted"><i>{{this.msg}}</i></div>
+                </li>
+                {{/each}}
+                <div id="new-messages"></div>
+            </ul>
         </div>
-        <input class="form-control" id="message"/>
-        <button id="submitBtn" class="btn btn-success">Send</button>
+        <input class="form-control input-lg" id="message"/>
+        <button id="submitBtn" class="btn btn-primary">Send</button>
     </div>
 </div>
