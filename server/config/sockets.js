@@ -7,7 +7,9 @@ module.exports = function (server) {
     // io.listen(app);
     io.sockets.on('connection', function (socket) {
         socket.on('sent-message', function (data) {  // data = message
-            io.sockets.in(socket.room).emit('new-message', socket.username, data);
+            console.log('SOCKET username on SENT');
+            console.log(socket.username);
+            io.sockets.in(clients[socket.username].room).emit('new-message', socket.username, data);
         });
 
         socket.on('new-client', function (data, callback) {
@@ -16,7 +18,9 @@ module.exports = function (server) {
             } else {
                 callback(true);
                 socket.username = data;
-                clients[socket.nickname] = socket;
+                clients[socket.username] = socket;
+                console.log('CLIENTSS');
+                console.log(clients);
 
             }
         });
@@ -40,8 +44,8 @@ module.exports = function (server) {
             console.log(rooms.indexOf(data.group));
             if (rooms.indexOf(data.group) >= 0) {
                 callback(true);
-                socket.join(data.group);
-                socket.room = data.group;
+                clients[data.user].join(data.group);
+                clients[data.user].room = data.group;
             } else {
                 callback(false);
             }
@@ -50,7 +54,7 @@ module.exports = function (server) {
 
         socket.on('leave-room', function (data, callback) {
             if (rooms.indexOf(data.group) >= 0) {
-                socket.leave(data.group);
+                clients[socket.username].leave(data.group);
             } else {
                 callback(false);
             }

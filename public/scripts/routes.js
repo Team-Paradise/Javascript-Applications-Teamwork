@@ -117,7 +117,6 @@ export default function switchControllers(partial) {
     }
 
     function test(action, context, url) {
-        console.log(context);
         var promise = new Promise(function (resolve, reject) {
             action.container.load(url, function () {
                 $.get(url, function (source) {

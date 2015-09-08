@@ -2,7 +2,7 @@ import io from 'socket.io/socket.io.js';
 var socket = io.connect();
 function addClient(user) {
     socket.emit('new-client', user, function(data){
-       // console.log(data);
+        console.log(data);
     });
 }
 

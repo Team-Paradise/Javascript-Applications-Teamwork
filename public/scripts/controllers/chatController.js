@@ -8,6 +8,7 @@ export default function chatController() {
         $chatBox = $("#new-messages"),
         $submitBtn = $("#submitBtn");
 
+
     $chatBox.html('');
     $("#message-box").animate({scrollTop: $(document).height()}, "slow");
 
@@ -17,9 +18,11 @@ export default function chatController() {
 
     $submitBtn.on('click', function (ev) {
         ev.preventDefault();
-        if ($messageField.val()) {
-            socket.emit('sent-message', $messageField.val());
+        var msg = $messageField.val();
+        if (msg) {
+            socket.emit('sent-message', msg);
             $messageField.val('');
+            addMessage({sender: JSON.parse(localStorage.getItem('user')), msg: msg, group: JSON.parse(localStorage.getItem('current-group'))});
         }
     });
 
@@ -47,9 +50,9 @@ export default function chatController() {
         // <div class="list-group-item-text text-muted"><i>{{this.msg}}</i></div>
 
         //return false;
-
+        console.log(socket);
         $chatBox.append(li);
         // TODO: think when to save the message? on sent or on new-message. First is maybe better if the msg is lost
-        addMessage({sender: data, msg: msg, group: JSON.parse(localStorage.getItem('current-group'))});
+
     });
 }
